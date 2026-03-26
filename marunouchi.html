@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>东京 - 大手町·丸之内专题</title>
+    <!-- 共享样式文件 -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <!-- 专题页专属样式 -->
+    <style>
+        /* 顶部Banner */
+        .marunouchi-banner {
+            height: 420px;
+            background: url(img/marunouchi-banner.jpg) center center no-repeat;
+            background-size: cover;
+            position: relative;
+            margin-top: 80px;
+        }
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+            display: flex;
+            align-items: flex-end;
+            padding: 50px 0;
+        }
+        .banner-content {
+            color: white;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .banner-title {
+            font-size: 45px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .banner-desc {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        /* 区域简介 */
+        .area-intro {
+            background-color: #f8f9fa;
+            padding: 60px 0;
+            margin: 30px 0 60px;
+        }
+        .intro-content {
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.8;
+            color: #495057;
+        }
+
+        /* 景点样式 */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #2d3436;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #0984e3;
+            margin: 15px auto 0;
+        }
+
+        .landmark-card {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        .landmark-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .landmark-img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .landmark-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .landmark-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            background-color: #0984e3;
+            color: white;
+            font-size: 13px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        .landmark-title {
+            font-size: 28px;
+            color: #2d3436;
+            margin-bottom: 20px;
+        }
+        .landmark-desc {
+            color: #636e72;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        .landmark-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            color: #2d3436;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+        }
+        .meta-item i {
+            margin-right: 8px;
+            color: #0984e3;
+        }
+
+        /* 特色街区 */
+        .district-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .district-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        .district-card:hover {
+            transform: translateY(-8px);
+        }
+        .district-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .district-info {
+            padding: 20px;
+        }
+        .district-title {
+            font-size: 18px;
+            color: #2d3436;
+            margin-bottom: 10px;
+        }
+        .district-desc {
+            font-size: 14px;
+            color: #636e72;
+            line-height: 1.6;
+        }
+
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #2d3436;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 768px) {
+            .marunouchi-banner {
+                height: 300px;
+            }
+            .banner-title {
+                font-size: 32px;
+            }
+            .landmark-img {
+                height: 280px;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏（与其他页面一致，支持返回首页） -->
+    <div class="fixed-top" style="background-color: rgba(0, 0, 0, 0.8);">
+        <nav class="navbar navbar-expand-xl navbar-dark">
+            <a class="navbar-brand ml-5" href="index.html">
+                <img src="img/logo-public.png" alt="东京旅游" style="height: 50px;">
+            </a>
+            <button type="button" class="btn btn-secondary navbar-toggler" data-toggle="collapse" data-target="#marunouchiNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="marunouchiNav">
+                <ul class="navbar-nav px-5 mr-5">
+                    <li class="nav-item mr-4"><a href="index.html" class="nav-link text-white">首页</a></li>
+                    <li class="nav-item mr-4"><a href="introduce.html" class="nav-link text-white">东京美景</a></li>
+                    <li class="nav-item mr-4"><a href="shop.html" class="nav-link text-white">东京美食</a></li>
+                    <li class="nav-item mr-4"><a href="shibuya.html" class="nav-link text-white">涉谷专题</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- 顶部Banner -->
+    <div class="marunouchi-banner">
+        <div class="banner-overlay">
+            <div class="banner-content">
+                <h1 class="banner-title">大手町·丸之内</h1>
+                <p class="banner-desc">东京的金融心脏与历史窗口，现代与古典交融的都市景观</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 区域简介 -->
+    <div class="area-intro">
+        <div class="container intro-content">
+            <p>大手町与丸之内位于东京都千代田区，是东京的政治与金融中心。丸之内街区以东京站为起点，林立着三菱商事、三井物产等日本代表性企业总部，被称为"日本的华尔街"；同时这里保留了大量明治至昭和时期的建筑，与现代摩天大楼形成独特对比。</p>
+            <p class="mt-3">东京站作为日本铁路交通的枢纽，其红砖站舍是东京的标志性建筑之一，而周边的丸之内仲通、东京中央邮局等历史建筑，更是见证了东京的城市发展历程。</p>
+        </div>
+    </div>
+
+    <!-- 主要景点 -->
+    <div class="container mb-12">
+        <h2 class="section-title">核心地标</h2>
+
+        <!-- 东京站 -->
+        <div class="landmark-card row">
+            <div class="col-lg-6">
+                <img src="img/tokyo-station.jpg" alt="东京站" class="landmark-img">
+            </div>
+            <div class="col-lg-6 landmark-info">
+                <span class="landmark-tag">交通枢纽·历史建筑</span>
+                <h3 class="landmark-title">东京站</h3>
+                <p class="landmark-desc">
+                    建于1914年的东京站是日本最繁忙的车站之一，每日客流量超过400万人次。其红砖站舍（丸之内站舍）是明治时期建筑的代表作，历经二战损毁后于2012年完成修复，恢复了百年前的原貌。
+                    <br><br>
+                    站内"东京站一番街"购物中心聚集了200多家店铺和餐厅，而站舍西侧的"KITTE"商场则由旧中央邮局改建而成，保留了历史建筑外观与现代商业功能。
+                </p>
+                <div class="landmark-meta">
+                    <div class="meta-item">
+                        <i class="bi bi-map-marker"></i>
+                        <span>东京都千代田区丸之内1-9</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="bi bi-clock"></i>
+                        <span>站舍全天开放（商店10:00-21:00）</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="bi bi-subway"></i>
+                        <span>JR线、东京地铁丸之内线/东西线直达</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 丸之内仲通 -->
+        <div class="landmark-card row flex-column-reverse flex-lg-row">
+            <div class="col-lg-6 landmark-info">
+                <span class="landmark-tag">商业街·景观大道</span>
+                <h3 class="landmark-title">丸之内仲通</h3>
+                <p class="landmark-desc">
+                    连接东京站与皇居外苑的林荫大道，长约1公里，两侧排列着日本代表性企业总部大楼与历史建筑。春季樱花盛开时，道路两侧的染井吉野樱形成绝美花道，是东京市中心最具格调的赏樱地之一。
+                    <br><br>
+                    大道沿线的"丸之内OAZO"、"新丸之内大厦"等建筑底层设有多家高端餐厅与咖啡馆，可在此一边用餐一边欣赏街景。年末时，整条街道会点亮华丽的圣诞灯饰，成为东京冬季的标志性景观。
+                </p>
+                <div class="landmark-meta">
+                    <div class="meta-item">
+                        <i class="bi bi-map-marker"></i>
+                        <span>东京都千代田区丸之内</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="bi bi-clock"></i>
+                        <span>全天开放（店铺依营业时间）</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="bi bi-camera"></i>
+                        <span>推荐拍摄时间：清晨或黄昏</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="img/marunouchi-nakadori.jpg" alt="丸之内仲通" class="landmark-img">
+            </div>
+        </div>
+    </div>
+
+    <!-- 特色街区与景点 -->
+    <div class="container mb-12">
+        <h2 class="section-title">周边特色景点</h2>
+        <div class="district-grid">
+            <!-- 大手町金融区 -->
+            <div class="district-card">
+                <img src="img/otemachi.jpg" alt="大手町金融区" class="district-img">
+                <div class="district-info">
+                    <h4 class="district-title">大手町金融区</h4>
+                    <p class="district-desc">
+                        日本央行（日本银行）所在地，聚集了三菱UFJ银行、三井住友银行等金融机构总部，高楼林立的现代建筑群展现了东京作为国际金融中心的面貌。区内"东京中央邮局红砖馆"是重要历史建筑。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 皇居外苑 -->
+            <div class="district-card">
+                <img src="img/imperial-palace.jpg" alt="皇居外苑" class="district-img">
+                <div class="district-info">
+                    <h4 class="district-title">皇居外苑</h4>
+                    <p class="district-desc">
+                        位于丸之内东侧的皇家园林，曾是江户城遗址。外苑的"二重桥"是东京标志性景观之一，可眺望皇居内苑。大片的草坪与松树营造出宁静氛围，是周边上班族午休散步的热门地点。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 东京国际论坛 -->
+            <div class="district-card">
+                <img src="img/tokyo-forum.jpg" alt="东京国际论坛" class="district-img">
+                <div class="district-info">
+                    <h4 class="district-title">东京国际论坛</h4>
+                    <p class="district-desc">
+                        由世界著名建筑师拉斐尔·维诺里设计的现代建筑群，以玻璃弧形大厅为标志。这里经常举办国际会议、音乐会等活动，底层大厅对公众开放，是感受现代建筑美学的好去处。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 旅游贴士 -->
+    <div class="container mb-10">
+        <div class="bg-light p-6 rounded-lg shadow-sm">
+            <h3 style="color: #2d3436; margin-bottom: 20px;">📌 旅游贴士</h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item bg-transparent d-flex align-items-start">
+                    <i class="bi bi-check-circle text-success mt-1 mr-3"></i>
+                    <span>建议从东京站丸之内口出发，沿丸之内仲通步行至皇居外苑，全程约15分钟，可一路欣赏历史建筑与现代街景。</span>
+                </li>
+                <li class="list-group-item bg-transparent d-flex align-items-start">
+                    <i class="bi bi-check-circle text-success mt-1 mr-3"></i>
+                    <span>东京站红砖站舍的"东京中央邮局旧址"内设有免费开放的历史展示馆，可了解东京站百年历史。</span>
+                </li>
+                <li class="list-group-item bg-transparent d-flex align-items-start">
+                    <i class="bi bi-check-circle text-success mt-1 mr-3"></i>
+                    <span>傍晚可前往"新丸之内大厦"52层的"东京City View"，俯瞰丸之内夜景与东京站灯光。</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <div class="back-to-top" id="backToTop">
+        <i class="bi bi-arrow-up"></i>
+    </div>
+
+    <!-- 页脚 -->
+    <footer style="background-color: #343a40; color: white; padding: 30px 0;">
+        <div class="container text-center">
+            <p>© 2025 东京旅游指南 | 涵总版权所有</p>
+            <p class="mt-2" style="font-size: 14px; opacity: 0.8;">
+                <a href="index.html" style="color: white; margin: 0 10px;">首页</a>
+                <a href="faq.html" style="color: white; margin: 0 10px;">常见问题</a>
+                <a href="#" style="color: white; margin: 0 10px;">联系我们</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- 脚本 -->
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script>
+        // 导航栏滚动效果
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) {
+                $('.fixed-top').css('background-color', 'rgba(0,0,0,0.9)');
+            } else {
+                $('.fixed-top').css('background-color', 'rgba(0,0,0,0.8)');
+            }
+
+            // 显示/隐藏返回顶部按钮
+            if ($(this).scrollTop() > 500) {
+                $('#backToTop').addClass('show');
+            } else {
+                $('#backToTop').removeClass('show');
+            }
+
+            // 滚动显示动画
+            $('.landmark-card').each(function() {
+                const cardTop = $(this).offset().top;
+                const windowBottom = $(window).scrollTop() + $(window).height();
+                if (cardTop < windowBottom - 100) {
+                    $(this).addClass('visible');
+                }
+            });
+        });
+
+        // 返回顶部功能
+        $('#backToTop').click(function() {
+            $('html, body').animate({scrollTop: 0}, 600);
+        });
+
+        // 页面加载时触发一次滚动检查
+        $(window).trigger('scroll');
+
+        console.log("涵总版权所有");
+    </script>
+</body>
+</html>

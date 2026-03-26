@@ -1,0 +1,534 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>东京都</title>
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/bootstrap.css" rel="stylesheet" /><!-- 引入bootstrap样式文件 -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"><!-- 引入bootstrap图标库 -->
+        <link rel="stylesheet" type="text/css" href="css/index.css"/>	
+        <!-- 引入我自己写的样式文件 -->
+	</head>
+	<body>
+		<!-- 导航栏 -->
+		<div class="fixed-top" style="background-color: rgb(0, 0, 0,0.8);">
+			<nav class="navbar navbar-expand-xl navbar-dark">
+				<a class="navbar-brand ml-5" href="index.html"><img src="img/logo-public.png"></a>
+				<!-- 显示折叠的按钮 -->
+				<button type="button" class="btn btn-secondary navbar-toggler" data-toggle="collapse"
+					data-target="#sample1"><span class="navbar-toggler-icon"></span></button>
+				<!-- 折叠隐藏的部分 -->
+				<div class="collapse navbar-collapse" id="sample1">
+					<!-- 左侧 -->
+					<ul class="navbar-nav px-5 mr-5">
+						<li class="nav-item mr-4"><a href="introduce.html" class="nav-link text-white">东京美景</a></li>
+						<li class="nav-item mr-4">
+							<a href="shop.html" class="nav-link  text-white">东京美食</a>
+						</li>
+						<li class="nav-item mr-4 dropdown">
+							<a href="" class="nav-link dropdown-toggle text-white" data-toggle="dropdown">互动</a>
+							<ul class="dropdown-menu">
+								<li><a href="" class="dropdown-item">微博</a></li>
+								<li><a href="" class="dropdown-item">微信</a></li>
+								<li><a href="" class="dropdown-item">客服</a></li>
+							</ul>
+						</li>
+						<li class="nav-item mr-4"><a href="" class="nav-link text-white">下载照片</a></li>
+					</ul>
+					<form class="form-inline" onsubmit="alert('搜索功能尚未实现')">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="站内搜索" />
+							<div class="input-group-append">
+								<button class="btn btn-sm btn-dark" type="submit"><i class="bi bi-search"></i></button>
+							</div>
+						</div>
+					</form>
+					<!-- 右侧 -->
+					<div class="myself ml-auto mt-3 mr-5">
+						<p><i class="bi bi-phone mr-4"
+								style="cursor: pointer; color:rgb(205, 190, 136) ; font-size: 33px;"
+								data-toggle="tooltip" data-placement="bottom" data-html="true"
+								title="<hr><img src='img/vx.png' width='170px' heigh='200px'><p class='tipcolor'>扫码添加微信<img src='img/polo.gif'></p>"></i><span
+								data-toggle="tooltip" data-placement="bottom" data-html="true"
+								data-template="<div class='tooltip' role='tooltip'><div class='tooltip-inner'></div></div>"
+								title="<hr><p class='text-secondary'>登录后可以了解更多哦</p><hr>">
+								<img src="img/tx.png" width="40px">欢迎<a href="#login" class="login"
+									data-toggle="modal">登录</a>
+						</p>
+						</span>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<!-- 霸屏 -->
+		<div class="big">
+			<video src="img/东京夜景.mp4" class="w-100" loop="loop" muted="muted" autoplay="autoplay"></video>
+			<a class="animate-bounce-down" href="#content"><i class="bi bi-chevron-double-down"
+					style="font-size: 40px;"></i></a>
+		</div>
+		<!-- 主体 -->
+		<div class="content container mt-4" id="content">
+			<div class="row">
+				<!-- 左侧轮播图 -->
+				<div class="col-xl-7">
+					<div class="carousel slide " id="sample" data-interval="2000" data-ride="carousel">
+						<!-- 1. 轮播的内容 -->
+						<div class="carousel-inner">
+							<!-- 第1页 -->
+							<div class="carousel-item active">
+								<img src="img/lb1.jpeg" class="img-fluid">
+							</div>
+							<!-- 第2页 -->
+							<div class="carousel-item">
+								<img src="img/lb2.jpeg" class="img-fluid">
+							</div>
+							<!-- 第3页 -->
+							<div class="carousel-item">
+								<img src="img/lb3.jpeg" class="img-fluid">
+							</div>
+							<!-- 第4页 -->
+							<div class="carousel-item">
+								<img src="img/lb4.jpeg" class="img-fluid">
+							</div>
+							<!-- 第5页 -->
+							<div class="carousel-item">
+								<img src="img/lb5.jpeg" class="img-fluid">
+							</div>
+						</div>
+
+						<!-- 2. 轮播下方指示器（可选项，一般都会使用） -->
+						<div class="carousel-indicators">
+							<div class="active" data-target="#sample" data-slide-to="0">
+								<p>4月樱花季</p>
+							</div>
+							<div data-target="#sample" data-slide-to="1">
+								7月花火季
+							</div>
+							<div data-target="#sample" data-slide-to="2">
+								11月红叶季
+							</div>
+							<div data-target="#sample" data-slide-to="3">
+								1月冬季
+							</div>
+							<div data-target="#sample" data-slide-to="4">
+								3月春季
+							</div>
+						</div>
+						<!-- 3. 前后切换控制项（可选项） -->
+						<a href="#sample" class="carousel-control-prev" data-slide="prev"><span
+								class="carousel-control-prev-icon"></span></a>
+						<a href="#sample" class="carousel-control-next" data-slide="next"><span
+								class="carousel-control-next-icon"></span></a>
+					</div>
+				</div>
+				<!-- 右侧边栏分页式导航+tab切换栏+列表组 -->
+				<div class="col-xl-5">
+					<!-- 第1部分：导航 -->
+					<!-- 两端对齐的分页式导航 -->
+					<ul class="nav nav-tabs nav-justified">
+						<li class="nav-item"><a href="#all" data-toggle="tab" class="nav-link active">樱花季</a></li>
+						<li class="nav-item"><a href="#notice" data-toggle="tab" class="nav-link">花火季</a></li>
+						<li class="nav-item"><a href="#competition" data-toggle="tab" class="nav-link">红叶季</a>
+						</li>
+						<li class="nav-item"><a href="#method" data-toggle="tab" class="nav-link">冬季</a></li>
+						<li class="nav-item"><a href="#community" data-toggle="tab" class="nav-link">春季</a></li>
+					</ul>
+
+					<!-- 第2部分：选项卡面板：列表组 -->
+					<div class="tab-content">
+						<!-- 综合 -->
+						<div class="tab-pane fade show active list-group list-group-flush" id="all">
+							<a class="list-first text-decoration-none  list-group-item"
+								href="javascript:;">东京樱期，粉瓣落肩头，春风裹粉浪</a>
+							<p class="text-secondary list-group-item"><span class="badge badge-orange mr-4">视频</span><a
+									class="text-decoration-none" href="javascript:;">
+									<a href="meguro-river.html" style="color: #d4af37; margin-left: 8px; font-weight: 500;"> 目黑川千鸟渊视觉盛宴!<i class="fa fa-play-circle-o"></i>
+								</a><em class="text-secondary float-right">12-18</em></p>
+							<p class="text-secondary list-group-item"><a href="2025-sakura-forecast.html"<span
+									class="badge badge-lightblue mr-4">新闻</span><a class="text-decoration-none"
+									href="javascript:;">
+									2025东京樱花季预计时间
+								</a><em class="text-secondary float-right">3-16</em></p></i>
+							<p class="text-secondary list-group-item"><span
+									class="badge badge-lightblue mr-4">新闻</span><a class="text-decoration-none"
+									href="javascript:;"><a href="sakura-fubuki.html">
+									今年有大概率发生樱吹雪</a>
+								</a><em class="text-secondary float-right">3-13</em></p>
+							<p class="text-secondary list-group-item"><span class="badge badge-gold mr-4">公告</span><a
+									class="text-decoration-none" href="javascript:;">
+									东京樱开，赏樱请错峰
+								</a><em class="text-secondary float-right">3-10</em></p>
+							<p class="text-secondary list-group-item border-bottom-0"><span
+									class="badge badge-gold mr-4">公告</span><a class="text-decoration-none"
+									href="javascript:;">
+									樱瓣落期，步道请注意
+								</a><em class="text-secondary float-right">3-08</em></p>
+							<p class="list-group-item list-last text-secondary border-bottom-0 text-center"><a href="sakura-season.html" style="color: #d4af37; text-decoration: none; font-weight: 500;">了解更多<a
+									class="text-decoration-none" href="javascript:;">樱花季<i
+										class="bi bi-arrow-right-short" style="font-size: 15px;"></i></a></p>
+						</div>
+
+						<!-- 公告 -->
+						<div class="tab-pane fade show list-group list-group-flush" id="notice">
+							<a class="list-first text-decoration-none  list-group-item"
+								href="javascript:;">花火掠东京，碎金满夜空</a>
+							<p class="text-secondary list-group-item"><span class="badge badge-gold mr-4">公告</span><a
+									class="text-decoration-none" href="javascript:;">
+									东京花火：隅田川畔今夕绽
+								</a><em class="text-secondary float-right">6-17</em></p>
+							<p class="text-secondary list-group-item"><span class="badge badge-gold mr-4">公告</span><a
+									class="text-decoration-none" href="javascript:;">
+									花火大会：台场海滨 19 点开
+								</a><em class="text-secondary float-right">6-16</em></p>
+							<p class="text-secondary list-group-item"><span class="badge badge-gold mr-4">公告</span><a
+									class="text-decoration-none" href="javascript:;">
+									今夜花火：东京湾彩虹大桥可观赏
+								</a><em class="text-secondary float-right">6-15</em></p>
+							<p class="text-secondary list-group-item"><span class="badge badge-gold mr-4">公告</span><a
+									class="text-decoration-none" href="javascript:;">
+									花火地点：上野公园傍晚见
+								</a><em class="text-secondary float-right">6-15</em></p>
+							<p class="text-secondary list-group-item border-bottom-0"><span
+									class="badge badge-gold mr-4">公告</span><a class="text-decoration-none"
+									href="javascript:;">
+									东京花火：浅草寺外夜绽放
+								</a><em class="text-secondary float-right">6-10</em></p>
+							<p class="list-group-item list-last text-secondary border-bottom-0 text-center">了解更多<a
+									class="text-decoration-none" href="javascript:;">花火大会<i
+										class="bi bi-arrow-right-short" style="font-size: 15px;"></i></a></p>
+						</div>
+						<!-- 赛事 -->
+						<div class="tab-pane fade show list-group list-group-flush" id="competition">
+							<a class="list-first text-decoration-none  list-group-item"
+								href="javascript:;">东京枫红染遍街巷</a>
+							<p class="text-secondary list-group-item"><span class="badge badge-orange mr-4">视频</span><a
+									class="text-decoration-none" href="javascript:;">
+									东京红叶季，浅草寺赏枫佳
+								</a><em class="text-secondary float-right">9-25</em></p>
+							<p class="text-secondary list-group-item"><span class="badge badge-orange mr-4">视频</span><a
+									class="text-decoration-none" href="javascript:;">
+									红叶季：京都苑 10 点开园
+								</a><em class="text-secondary float-right">9-25</em></p>
+							<p class="text-secondary list-group-item"><span class="badge badge-orange mr-4">视频</span><a
+									class="text-decoration-none" href="javascript:;">
+									东京红叶盛，明治公园宜赏
+								</a><em class="text-secondary float-right">9-24</em></p>
+							<p class="text-secondary list-group-item"><span class="badge badge-orange mr-4">视频</span><a
+									class="text-decoration-none" href="javascript:;">
+									东京红叶：上野公园赏期至
+								</a><em class="text-secondary float-right">9-24</em></p>
+							<p class="text-secondary list-group-item border-bottom-0"><span
+									class="badge badge-blue mr-4">公告</span><a class="text-decoration-none"
+									href="javascript:;">
+									红叶步道：隅田川畔请错峰
+								</a><em class="text-secondary float-right">9-23</em></p>
+							<p class="list-group-item list-last text-secondary border-bottom-0 text-center">了解更多<a
+									class="text-decoration-none" href="javascript:;">红叶季<i
+										class="bi bi-arrow-right-short" style="font-size: 15px;"></i></a></p>
+						</div>
+						<!-- 攻略 -->
+						<div class="tab-pane fade show list-group list-group-flush" id="method">
+							<a class="list-first text-decoration-none  list-group-item"
+								href="javascript:;">东京覆雪，檐角落霜白</a>
+							<p class="text-secondary list-group-item"><span class="badge badge-orange mr-4">公告</span><a
+									class="text-decoration-none" href="javascript:;">
+									东京冬寒，出行请添衣
+								</a><em class="text-secondary float-right">11-23</em></p>
+							<p class="text-secondary list-group-item"><span class="badge badge-green mr-4">公告</span><a
+									class="text-decoration-none" href="javascript:;">
+									东京雪后，步道防滑提示
+								</a><em class="text-secondary float-right">11-20</em></p>
+							<p class="text-secondary list-group-item"><span class="badge badge-green mr-4">公告</span><a
+									class="text-decoration-none" href="javascript:;">
+									冬季亮灯：银座今夜启幕
+								</a><em class="text-secondary float-right">12-19</em></p>
+							<p class="text-secondary list-group-item"><span class="badge badge-green mr-4">视频</span><a
+									class="text-decoration-none" href="javascript:;">
+									东京冬樱：上野公园始开
+								</a><em class="text-secondary float-right">12-16</em></p>
+							<p class="text-secondary list-group-item border-bottom-0"><span
+									class="badge badge-lightblue mr-4">新闻</span><a class="text-decoration-none"
+									href="javascript:;">
+									冬季闭园：浅草寺 17 点止
+								</a><em class="text-secondary float-right">12-13</em></p>
+							<p class="list-group-item list-last text-secondary border-bottom-0 text-center">了解更多<a
+									class="text-decoration-none" href="javascript:;">雪季<i
+										class="bi bi-arrow-right-short" style="font-size: 15px;"></i></a></p>
+						</div>
+						<!-- 社区 -->
+						<div class="tab-pane fade show list-group list-group-flush" id="community">
+							<a class="list-first text-decoration-none  list-group-item"
+								href="javascript:;">春临东京，花气满街巷</a>
+							<p class="text-secondary list-group-item"><span class="badge badge-orange mr-4">公告</span><a
+									class="text-decoration-none" href="javascript:;">
+									东京春期，上野赏春请错峰
+								</a><em class="text-secondary float-right">2-24</em></p>
+							<p class="text-secondary list-group-item"><span
+									class="badge badge-lightblue mr-4">公告</span><a class="text-decoration-none"
+									href="javascript:;">
+									春日开园：明治公园 6 点开放
+								</a><em class="text-secondary float-right">2-24</em></p>
+							<p class="text-secondary list-group-item"><span class="badge badge-orange mr-4">公告</span><a
+									class="text-decoration-none" href="javascript:;">
+									东京春汛，隅田川畔禁近岸
+								</a><em class="text-secondary float-right">2-23</em></p>
+							<p class="text-secondary list-group-item"><span
+									class="badge badge-lightblue mr-4">新闻</span><a class="text-decoration-none"
+									href="javascript:;">
+									东京樱开，首日客流超 10 万
+								</a><em class="text-secondary float-right">2-22</em></p>
+							<p class="text-secondary list-group-item border-bottom-0"><span
+									class="badge badge-orange mr-4">新闻</span><a class="text-decoration-none"
+									href="javascript:;">
+									春日新茶，东京市场今上市
+								</a><em class="text-secondary float-right">12-21</em></p>
+							<p class="list-group-item list-last text-secondary border-bottom-0 text-center">了解更多<a
+									class="text-decoration-none" href="javascript:;">春季<i
+										class="bi bi-arrow-right-short" style="font-size: 15px;"></i></a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 主体第二部分 -->
+			<div class="row mt-5">
+				<!-- 左侧边栏热门活动：卡片组 -->
+				<div class="col-xl-7">
+					<h4>
+						<div class="mr-3 mt-2"
+							style="height: 25px;width: 4px;background-color:#0da0b4;display: inline-block;"></div>东京出行指南
+					</h4>
+					<div class="row">
+						<div class="col-md-3 col-6">
+            <div class="card border-0" style="width: 12rem;">
+            <img class="card-img-top border-0" src="img/card1.jpg">
+            <div class="card-body">
+            <p class="card-text">日本签证</p>
+            <p style="margin-bottom: 0; color: rgb(29,166,186);">
+                <!-- 确保这里的href指向正确的签证页面 -->
+                <a href="visa-2025.html" class="text-decoration-none text-reset">2025年新规</a>
+                <span class="float-right badge badge-gold-fill" style="color: whitesmoke;font-family: '微软雅黑';">NEW</span>
+                        </p>
+                        </div>
+                        </div>
+                        </div>
+						<div class="col-md-3 col-6">
+            <div class="card border-0" style="width: 12rem;">
+            <img class="card-img-top border-0" src="img/card2.jpg">
+            <div class="card-body">
+            <p class="card-text">如何从机场达到市区</p>
+            <p style="margin-bottom: 0; color: rgb(29,166,186);">
+                <a href="airport-to-city.html" class="text-decoration-none text-reset">东京交通指南</a>
+                <span class="float-right badge badge-red-fill" style="color: whitesmoke;font-family: '微软雅黑';">HOT</span>
+             </p>
+                 </div>
+                 </div>
+                 </div>
+						<div class="col-md-3 col-6">
+             <div class="card border-0" style="width: 12rem;">
+             <img class="card-img-top border-0" src="img/card3.jpg">
+             <div class="card-body">
+            <p class="card-text">机场退税</p>
+            <p style="margin-bottom: 0; color: rgb(29,166,186);">
+                <a href="tax-refund.html" class="text-decoration-none text-reset">东京购物指南</a>
+                <span class="float-right badge badge-red-fill" style="color: whitesmoke;font-family: '微软雅黑';">HOT</span>
+            </p>
+            </div>
+            </div>
+            </div>
+						<div class="col-md-3 col-6">
+                  <div class="card border-0" style="width: 12rem;">
+                  <img class="card-img-top border-0" src="img/card4.jpg">
+                 <div class="card-body">
+            <!-- 在这里添加链接 -->
+            <p class="card-text"><a href="essentials.html" class="text-dark">出行必备物品</a></p>
+            <p style="margin-bottom: 0; color: rgb(29,166,186);">日本QR码申请<span
+                    class="float-right badge badge-gold-fill"
+                    style="color: whitesmoke;font-family: '微软雅黑';">LONG</span></p>
+                </div>
+               </div>
+              </div>					</div>
+				</div>
+				<!-- 右侧边栏：功能区 -->
+				<div class="col-xl-5 mt-5">
+					<div class="row">
+						<div class="col-xl-8">
+							<video width="406" height="182" autoplay muted loop title="下载风景" style="cursor: pointer;">
+								<source src="img/btn-download.mpeg" type="video/mp4">
+								</source>
+							</video>
+						</div>
+						<div class="col-xl-4 ">
+							<img class="mb-md-2" src="img/btn1.png" onmousemove="move(this)" onmouseleave="leave(this)"
+								width="130px" style="cursor: pointer;">
+								<!-- 实现图片切换的JS效果 -->
+							<script>
+								function move(img) {
+									img.src = "img/btn3.png";
+								}
+
+								function leave(img) {
+									img.src = "img/btn1.png";
+								}
+							</script>
+							<!-- 弹出框 -->
+							<img src="img/btn2.png" width="130px" style="cursor: pointer;" data-container="body"
+								data-toggle="popover" data-html="true" data-placement="bottom"
+								data-content="<div class='free'><img src='img/free1.png' width='60px' height='60px'></div><div class='free'><img src='img/free2.png' width='60px' height='60px'></div><div class='free'><img src='img/free3.png' width='60px' height='60px'></div><div class='free'><img src='img/free4.png' width='60px' height='60px'></div><div class='free'><img src='img/free5.png' width='60px' height='60px'></div><div class='free'><img src='img/free6.png' width='60px' height='60px'></div><div class='free'><img src='img/free7.png' width='60px' height='60px'></div><div class='free'><img src='img/free8.png' width='60px' height='60px'></div><div class='free'><img src='img/free9.png' width='60px' height='60px'></div><div class='free'><img src='img/free10.png' width='60px' height='60px'></div><div class='free'><img src='img/free11.png' width='60px' height='60px'></div><div class='free'><img src='img/free12.png' width='60px' height='60px'></div><div class='free'><img src='img/free13.png' width='60px' height='60px'></div><div class='free'><img src='img/free14.png' width='60px' height='60px'></div><div class='free'><img src='img/free15.png' width='60px' height='60px'></div><div class='free'><img src='img/free16.png' width='60px' height='60px'></div>">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12 mt-2">
+							<div class="more">
+								<p>
+									<a href="online-service.html" style="color: #3498db; text-decoration: none; font-weight: 500;"<img src="img/kf.png">
+									<span>在线客服</span><i class="fa fa-headphones"></i>
+								</p>
+							</div>
+							<div class="more">
+								<p>
+									<a href="tokyo-train-map.html" style="color: #1a365d; text-decoration: none; font-weight: 500;"><img src="img/zxdt.png">
+									<span>电车路线</span><i class="fa fa-subway"></i> 
+								</p>
+							</div>
+							<div class="more">
+								<p>
+									<a href="tokyo-surroundings.html" style="text-decoration: none;"><img src="img/yz.png">
+									<span>东京周边<span>	
+								</p></a>
+							</div>
+							<div class="more">
+								<p>
+									<a href="jingdian.html" style="color: #1a365d; text-decoration: none; font-weight: 500;"><img src="img/xgzd.png">
+									<span>热门景点</span>
+								</p></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 页底一排图片 -->
+	<div class="container my-5">
+    <div class="row">
+        <div class="col-xl-2 col-4">
+            <div class="imgbox">
+                <!-- 为东京铁塔图片添加跳转链接 -->
+                <a href="tokyo-tower.html">
+                    <img src="img/ys.jpg" width="210px" height="135px">
+                </a>
+                <div class="imgbox-text">
+                    <p>东京铁塔</p>
+                </div>
+            </div>
+        </div>
+				<div class="col-xl-2 col-4">
+    <a href="shibuya.html" style="text-decoration: none; display: block;">
+        <div class="imgbox">
+            <img src="img/yen.jpg" width="210px" height="135px" alt="涉谷">
+            <div class="imgbox-text">
+                <p>涉谷</p>
+            </div>
+        </div>
+    </a>
+</div>
+				<div class="col-xl-2 col-4">
+					<a href="marunouchi.html" style="text-decoration: none;"><div class="imgbox">
+						<img src="img/sh.jpg" width="210px" height="135px">
+						<div class="imgbox-text">
+							<p>大手町&nbsp;&nbsp;丸之内</p>
+						</div>
+					</div></a>
+				</div>
+				<div class="col-xl-2 col-4">
+					<a href="odaiba.html" style="text-decoration: none;"><div class="imgbox">
+						<img src="img/mc.jpg" width="210px" height="135px">
+						<div class="imgbox-text">
+							<p>台场</p>
+						</div>
+					</div></a>
+				</div>
+				<div class="col-xl-2 col-4">
+					<a href="roppongi.html" style="text-decoration: none;"><div class="imgbox">
+						<img src="img/mn.jpg" width="210px" height="135px">
+						<div class="imgbox-text">
+							<p>六本木</p>
+						</div>
+					</div></a>
+				</div>
+				<div class="col-xl-2 col-4">
+					<a href="shinjuku.html" style="text-decoration: none;"><div class="imgbox">
+						<img src="img/gm.jpg" width="210px" height="135px">
+						<div class="imgbox-text">
+							<p>新宿</p>
+						</div>
+					</div></a>
+				</div>
+			</div>
+		</div>
+		<!-- 页底版权 -->
+		<div style="background-color: rgb(227,226,226);" class="py-5 mt-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 pt-5">
+						<img src="img/logo2.png">
+						<img src="img/logo3.png">
+					</div>
+					<div class="col-md-8 pt-3">
+						<p style="font-size: 16px; color: rgb(159,147,120);">
+							东京的美，是晨光里浅草寺的朱红鸟居，千百座木柱连成绯红隧道，檐角铜铃在微风中轻颤，将千年香火的静谧晕染成流动的诗。拾级而上，雷门灯笼的暖光漫过石阶，与檐下风铃的清响缠绕，时光仿佛在此处折转，古寺的禅意与市井的烟火温柔相拥。​
+待到春樱纷飞时，上野公园便成了粉色梦境。花瓣乘着东风掠过湖面，漾开细碎的银光，落樱铺就的小径上，木屐踏过的声响与游人的轻笑交织，连空气都浸着清甜的浪漫。若逢暮色四合，隅田川畔的樱花与远处的东京晴空塔相映，塔身流光随暮色渐深变幻，从鎏金到靛蓝，最后融在漫天星子的温柔里。​
+秋日的东京则是打翻了调色盘，明治神宫的古枫将林荫道染成炽烈的红，阳光透过叶隙洒下，在青苔石径上织就斑驳的金网。神宫深处的御苑里，银杏大道铺着满地碎金，风吹过，叶片簌簌作响，似在诉说百年的静谧。​
+而当夜色降临，新宿御苑的灯光亮起，湖面倒映着楼宇的霓虹，岸边芦苇在夜色中轻摇，现代都市的繁华与自然的清雅在此刻达成奇妙的平衡。东京的美，从不是单一的惊艳，而是古与今、刚与柔的交织，是每一缕晨光、每一片落樱、每一盏灯火里，都藏着的温柔与诗意。</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 登录模态框 -->
+		<div class="modal" id="login" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header border-bottom-0">
+						<a href="javascript:;" class="close text-danger" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true" style="font-size: 50px;">&times;</span>
+						</a>
+					</div>
+					<div class="modal-body">
+						<h5 class="modal-title mb-3" style="padding-left: 35%!important;">账号密码登录</h5>
+						<form onsubmit="return valid()" action="index.html" method="get">
+							<div class="form-group px-5 pb-5">
+								<input title="请输入4-11位数字的账号" class="form-control" type="text" name="username" placeholder="支持QQ号/邮箱/手机号登录"
+									value="" />
+								<div class="tips">
+
+								</div>
+								<input class="form-control mt-3" title="密码为任意字符6-20位" type="password" name="password" placeholder="密码"
+									value="" />
+								<div class="tips">
+
+								</div>
+								<button class="btn btn-info mt-3 " style="width: 100%;" type="submit">登录</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-3.4.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/bootstrap.bundle.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/login.js" type="text/javascript" charset="utf-8"></script><!-- 引入表单验证的JS文件 -->
+	<!-- 在页面上初始化所有提示框 -->
+	<!-- 不加下方这段，不会启动提示框和弹出窗效果 -->
+	<script type="text/javascript">
+		$(function() {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
+		$(function() {
+			$('[data-toggle="popover"]').popover()
+		})
+	</script>
+	<script type="text/javascript">
+		console.log("涵总版权所有")
+	</script>
+</html>

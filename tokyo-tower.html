@@ -1,0 +1,302 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>东京铁塔 - 东京地标建筑</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <style>
+        .tower-section {
+            padding: 30px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .tower-img {
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+        .tower-img:hover {
+            transform: translateY(-5px);
+        }
+        .back-home {
+            margin: 20px 0;
+            display: inline-block;
+        }
+        .fact-box {
+            background-color: #f0f7ff;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .highlight {
+            color: #e53935;
+            font-weight: bold;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ffc107;
+        }
+        .access-method {
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .access-method h5 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="fixed-top" style="background-color: rgb(0, 0, 0,0.8);">
+        <nav class="navbar navbar-expand-xl navbar-dark">
+            <a class="navbar-brand ml-5" href="index.html"><img src="img/logo-public.png"></a>
+            <button type="button" class="btn btn-secondary navbar-toggler" data-toggle="collapse"
+                    data-target="#sample1"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="sample1">
+                <ul class="navbar-nav px-5 mr-5">
+                    <li class="nav-item mr-4"><a href="introduce.html" class="nav-link text-white">东京美景</a></li>
+                    <li class="nav-item mr-4">
+                        <a href="shop.html" class="nav-link  text-white">东京美食</a>
+                    </li>
+                    <li class="nav-item mr-4 dropdown">
+                        <a href="" class="nav-link dropdown-toggle text-white" data-toggle="dropdown">互动</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="" class="dropdown-item">微博</a></li>
+                            <li><a href="" class="dropdown-item">微信</a></li>
+                            <li><a href="" class="dropdown-item">客服</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item mr-4"><a href="" class="nav-link text-white">下载照片</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- 主体内容 -->
+    <div class="container" style="margin-top: 100px; padding-bottom: 50px;">
+        <a href="index.html" class="back-home text-decoration-none text-primary">
+            <i class="bi bi-arrow-left"></i> 返回主页
+        </a>
+        
+        <h1 class="mb-5 text-center">东京铁塔（とうきょうタワー）</h1>
+        
+        <!-- 东京铁塔概述 -->
+        <div class="tower-section">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="img/tokyo-tower-main.jpg" class="tower-img" alt="东京铁塔全景">
+                </div>
+                <div class="col-md-6">
+                    <h3>一、地标简介</h3>
+                    <p class="text-secondary mt-3">
+                        东京铁塔建于1958年，高333米，是东京最具代表性的地标之一。其设计灵感源自巴黎埃菲尔铁塔，
+                        但高度比埃菲尔铁塔高出13米。最初作为电视信号发射塔而建，如今已成为东京重要的观光景点和文化符号。
+                    </p>
+                    <p class="text-secondary">
+                        铁塔通体呈橙白色，这种配色不仅美观，更符合航空安全标准，便于飞行器识别。夜晚的东京铁塔会点亮灯光，
+                        不同季节会有不同的灯光秀，尤其在圣诞季和新年期间，灯光装饰尤为华丽。
+                    </p>
+                    
+                    <div class="fact-box">
+                        <h5><i class="bi bi-lightbulb"></i> 趣味知识</h5>
+                        <p>东京铁塔的建造共用了约14,000吨钢材，其中约一半来自美军在二战后留下的坦克和武器残骸回收再利用。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 历史与意义 -->
+        <div class="tower-section">
+            <h3>二、历史与文化意义</h3>
+            <div class="row mt-3">
+                <div class="col-md-6 order-md-2">
+                    <img src="img/tokyo-tower-history.jpg" class="tower-img" alt="东京铁塔历史照片">
+                </div>
+                <div class="col-md-6 order-md-1">
+                    <div class="timeline-item">
+                        <h5>1958年</h5>
+                        <p class="text-secondary">东京铁塔正式竣工并对外开放，当时是为了解决东京地区的电视信号覆盖问题</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h5>1960年代-1990年代</h5>
+                        <p class="text-secondary">成为日本经济高速增长时期的象征，无数电影、电视剧和动漫作品中都能看到它的身影</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h5>2010年</h5>
+                        <p class="text-secondary">东京晴空塔开始建设，但东京铁塔依然保持着其在东京人心中的特殊地位</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h5>至今</h5>
+                        <p class="text-secondary">虽不再承担主要信号发射功能，但每年仍吸引超过300万游客参观，是东京不可错过的地标</p>
+                    </div>
+                    
+                    <p class="text-secondary mt-4">
+                        对日本人而言，东京铁塔不仅是一座建筑，更是战后复兴、经济腾飞的象征，承载着几代人的集体记忆。
+                        在许多重要时刻（如新年、灾害纪念），铁塔会以特殊的灯光形式传递情感与力量。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 观光信息 -->
+        <div class="tower-section">
+            <h3>三、观光信息</h3>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <img src="img/tokyo-tower-view.jpg" class="tower-img" alt="东京铁塔观景台视角">
+                    <img src="img/tokyo-tower-night.jpg" class="tower-img" alt="东京铁塔夜景">
+                </div>
+                <div class="col-md-6">
+                    <h4>观景台信息</h4>
+                    <p class="text-secondary">东京铁塔设有两个观景台：</p>
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item">
+                            <strong>大展望台（150米）适合全家游览，设有玻璃地板体验区，可360°俯瞰东京市区</strong>
+                            
+                        </li>
+                        <li class="list-group-item">
+                            <strong>特别展望台（250米）更高的观景位置，能远眺富士山（天气晴朗时），黄昏时分是拍摄东京日落的绝佳位置</strong>
+                            
+                        </li>
+                    </ul>
+
+                    <h4>开放时间与门票</h4>
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item">
+                            <strong>开放时间</strong>：9:00-23:00（最后入场时间22:30）
+                        </li>
+                        <li class="list-group-item">
+                            <strong>门票价格：大展望台：成人1,200日元，儿童（4-12岁）600日元</strong>：
+                        </li>
+                    </ul>
+
+                    <h4>推荐游览时间</h4>
+                    <p class="text-secondary">
+                        建议选择黄昏时分（日落前1小时）前往，既能欣赏白天的东京全景，又能体验日落到夜景的美丽转变。
+                        避开周末和节假日的高峰时段（11:00-16:00），可减少排队时间。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 周边设施 -->
+        <div class="tower-section">
+            <h3>四、周边设施与体验</h3>
+            <div class="row mt-3">
+                <div class="col-md-4">
+                    <img src="img/tokyo-tower-museum.jpg" class="tower-img" alt="东京铁塔海贼王主题乐园">
+                    <h5 class="text-center mt-2">海贼王主题乐园</h5>
+                    <p class="text-secondary text-center">位于铁塔底层，是全球首个海贼王官方主题乐园，适合动漫爱好者</p>
+                </div>
+                <div class="col-md-4">
+                    <img src="img/tokyo-tower-restaurant.jpg" class="tower-img" alt="东京铁塔餐厅">
+                    <h5 class="text-center mt-2">铁塔餐厅</h5>
+                    <p class="text-secondary text-center">1楼和2楼设有多家餐厅，可品尝日式、西式料理，部分餐厅提供铁塔景观座位</p>
+                </div>
+                <div class="col-md-4">
+                    <img src="img/tokyo-tower-garden.jpg" class="tower-img" alt="东京铁塔周边公园">
+                    <h5 class="text-center mt-2">周边公园</h5>
+                    <p class="text-secondary text-center">铁塔周围有芝公园和增上寺，是拍摄铁塔全景的最佳地点，也是当地人休闲的好去处</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 交通指南 -->
+        <div class="tower-section">
+            <h3>五、交通指南</h3>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="access-method">
+                        <h5><i class="bi bi-subway"></i> 地铁（推荐）</h5>
+                        <p>搭乘都营浅草线或京急线至「大门站」，从A6出口步行约5分钟</p>
+                        <p>或搭乘东京地铁日比谷线至「神谷町站」，从1号出口步行约7分钟</p>
+                        <p class="text-secondary"><i class="bi bi-info-circle"></i> 地铁是最经济便捷的方式，票价约170-200日元</p>
+                    </div>
+                    
+                    <div class="access-method">
+                        <h5><i class="bi bi-bus"></i> 巴士</h5>
+                        <p>搭乘都营巴士05系统、品9系统至「东京铁塔前」站下车即到</p>
+                        <p>或搭乘都营巴士浅草线至「芝公园入口」站，步行约3分钟</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="access-method">
+                        <h5><i class="bi bi-taxi"></i> 出租车</h5>
+                        <p>直接告知司机"东京铁塔"即可，从东京站出发约20分钟，费用约1,500-2,000日元</p>
+                        <p>从新宿站出发约30分钟，费用约3,000-4,000日元</p>
+                    </div>
+                    
+                    <div class="access-method">
+                        <h5><i class="bi bi-bicycle"></i> 步行/骑行</h5>
+                        <p>从新桥站步行约20分钟，沿途可欣赏东京街景</p>
+                        <p>东京市区有公共自行车租赁服务，骑行至铁塔也是不错的选择</p>
+                    </div>
+                    
+                    <img src="img/tokyo-tower-map.jpg" class="tower-img mt-3" alt="东京铁塔交通地图">
+                </div>
+            </div>
+        </div>
+
+        <!-- 游览小贴士 -->
+        <div class="tower-section">
+            <h3>六、游览小贴士</h3>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <ul class="list-group">
+                        <li class="list-group-item"><i class="bi bi-check-circle text-success"></i> 可提前在官网购买电子票，减少现场排队时间</li>
+                        <li class="list-group-item"><i class="bi bi-check-circle text-success"></i> 特别展望台空间较小，节假日可能需要排队等候</li>
+                        <li class="list-group-item"><i class="bi bi-check-circle text-success"></i> 铁塔内设有储物柜，可存放大型行李（500日元/次）</li>
+                        <li class="list-group-item"><i class="bi bi-check-circle text-success"></i> 周边的增上寺是拍摄铁塔与传统建筑同框的绝佳位置</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-group">
+                        <li class="list-group-item"><i class="bi bi-check-circle text-success"></i> 夜间灯光秀在20:00、21:00、22:00有特别灯光变化</li>
+                        <li class="list-group-item"><i class="bi bi-check-circle text-success"></i> 纪念品商店有铁塔造型的独特商品，适合作为伴手礼</li>
+                        <li class="list-group-item"><i class="bi bi-check-circle text-success"></i> 夏季（7-8月）晚上9点后游客较少，可避开人流</li>
+                        <li class="list-group-item"><i class="bi bi-check-circle text-success"></i> 若时间充裕，可在周边的芝公园野餐，欣赏铁塔美景</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页底版权 -->
+    <div style="background-color: rgb(227,226,226);" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 pt-5">
+                    <img src="img/logo2.png">
+                    <img src="img/logo3.png">
+                </div>
+                <div class="col-md-8 pt-3">
+                    <p style="font-size: 16px; color: rgb(159,147,120);">
+                        东京的美，是晨光里浅草寺的朱红鸟居，千百座木柱连成绯红隧道，檐角铜铃在微风中轻颤，将千年香火的静谧晕染成流动的诗。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.4.1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/bootstrap.bundle.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

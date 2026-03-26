@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>东京周边 - 东京旅游指南</title>
+    <!-- 共享样式文件 -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <!-- 专题页专属样式 -->
+    <style>
+        /* 顶部区域 */
+        .header-section {
+            height: 400px;
+            margin-top: 80px;
+            background: url(img/surroundings-banner.jpg) center center no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .header-content {
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        .header-title {
+            font-size: 42px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .header-desc {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        /* 简介区域 */
+        .intro-section {
+            padding: 50px 0;
+            background-color: #f8f9fa;
+        }
+        .intro-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .intro-container p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        .intro-highlight {
+            display: inline-block;
+            padding: 2px 8px;
+            background-color: #ffeaa7;
+            border-radius: 4px;
+            margin: 0 3px;
+            color: #2d3436;
+            font-weight: 500;
+        }
+
+        /* 区域导航 */
+        .region-nav {
+            padding: 30px 0;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+        }
+        .nav-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px 25px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .nav-item a {
+            color: #444;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 5px 0;
+            position: relative;
+        }
+        .nav-item a:hover, .nav-item a.active {
+            color: #e74c3c;
+        }
+        .nav-item a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #e74c3c;
+        }
+
+        /* 各县展示区 */
+        .regions-section {
+            padding: 60px 0;
+        }
+        .region-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+            margin-bottom: 40px;
+            transition: transform 0.3s ease;
+        }
+        .region-card:hover {
+            transform: translateY(-5px);
+        }
+        .region-header {
+            display: flex;
+            align-items: center;
+            padding: 20px 25px;
+            background-color: #f1f5f8;
+            border-bottom: 1px solid #f1f5f8;
+        }
+        .region-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #e74c3c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 22px;
+            margin-right: 15px;
+        }
+        .region-title {
+            margin: 0;
+            font-size: 24px;
+            color: #2d3436;
+        }
+        .region-distance {
+            margin-left: auto;
+            color: #666;
+            font-size: 14px;
+            background-color: #e8f4f8;
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+
+        .region-body {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .region-img-container {
+            flex: 1 1 350px;
+        }
+        .region-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 250px;
+        }
+        .region-info {
+            flex: 1 1 500px;
+            padding: 30px;
+        }
+        .region-desc {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .region-highlights {
+            margin: 25px 0;
+        }
+        .highlight-title {
+            font-size: 16px;
+            color: #2d3436;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        .highlight-title i {
+            color: #e74c3c;
+            margin-right: 8px;
+        }
+        .highlight-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .highlight-tag {
+            background-color: #f8f9fa;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #444;
+            display: flex;
+            align-items: center;
+        }
+        .highlight-tag i {
+            color: #e74c3c;
+            margin-right: 5px;
+            font-size: 12px;
+        }
+        .region-tips {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+        .region-tips p {
+            margin: 0;
+            color: #856404;
+            font-size: 14px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .region-tips i {
+            margin-right: 8px;
+            margin-top: 3px;
+        }
+
+        /* 交通指南 */
+        .transport-section {
+            padding: 60px 0;
+            background-color: #f8f9fa;
+        }
+        .section-heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-heading h2 {
+            font-size: 28px;
+            color: #2d3436;
+            margin-bottom: 10px;
+        }
+        .section-heading p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .transport-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .transport-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        .transport-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .transport-title {
+            font-size: 18px;
+            color: #2d3436;
+            margin-bottom: 12px;
+        }
+        .transport-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* 返回顶部按钮 */
+        .back-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background-color: #2d3436;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        .back-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .header-section {
+                height: 300px;
+            }
+            .header-title {
+                font-size: 32px;
+            }
+            .region-header {
+                padding: 15px 20px;
+            }
+            .region-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            .region-title {
+                font-size: 20px;
+            }
+            .region-info {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏（支持返回首页） -->
+    <div class="fixed-top" style="background-color: rgba(0, 0, 0, 0.8);">
+        <nav class="navbar navbar-expand-xl navbar-dark">
+            <a class="navbar-brand ml-5" href="index.html">
+                <img src="img/logo-public.png" alt="东京旅游" style="height: 50px;">
+            </a>
+            <button type="button" class="btn btn-secondary navbar-toggler" data-toggle="collapse" data-target="#surroundingsNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="surroundingsNav">
+                <ul class="navbar-nav px-5 mr-5">
+                    <li class="nav-item mr-4"><a href="index.html" class="nav-link text-white">首页</a></li>
+                    <li class="nav-item mr-4"><a href="introduce.html" class="nav-link text-white">东京美景</a></li>
+                    <li class="nav-item mr-4"><a href="shop.html" class="nav-link text-white">东京美食</a></li>
+                    <li class="nav-item mr-4"><a href="traffic.html" class="nav-link text-white">交通指南</a></li>
+                    <li class="nav-item mr-4"><a href="hotel.html" class="nav-link text-white">住宿推荐</a></li>
+                    <li class="nav-item mr-4"><a href="odaiba.html" class="nav-link text-white">台场专题</a></li>
+                    <li class="nav-item mr-4"><a href="shibuya.html" class="nav-link text-white">涉谷专题</a></li>
+                    <li class="nav-item mr-4"><a href="marunouchi.html" class="nav-link text-white">大手町·丸之内</a></li>
+                    <li class="nav-item mr-4"><a href="faq.html" class="nav-link text-white">常见问题</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- 顶部区域 -->
+    <div class="header-section">
+        <div class="header-overlay">
+            <div class="header-content">
+                <h1 class="header-title">东京周边</h1>
+                <p class="header-desc">探索东京之外的魅力——从富士山到古都，一日游或短途旅行的完美选择</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 简介区域 -->
+    <div class="intro-section">
+        <div class="container intro-container">
+            <p>东京周边的各县（<span class="intro-highlight">神奈川县</span>、<span class="intro-highlight">千叶县</span>、<span class="intro-highlight">埼玉县</span>、<span class="intro-highlight">静冈县</span>、<span class="intro-highlight">枥木县</span>等）拥有丰富的自然景观与人文历史，从东京出发1-2小时即可抵达。无论是富士山的壮丽、镰仓的古都风情，还是箱根的温泉与温泉，都能让人体验到与东京都市风光截然不同的日本魅力。</p>
+        </div>
+    </div>
+
+    <!-- 区域导航 -->
+    <div class="region-nav">
+        <ul class="nav-list">
+            <li class="nav-item"><a href="#kanagawa" class="active">神奈川县</a></li>
+            <li class="nav-item"><a href="#shizuoka">静冈县</a></li>
+            <li class="nav-item"><a href="#chiba">千叶县</a></li>
+            <li class="nav-item"><a href="#saitama">埼玉县</a></li>
+            <li class="nav-item"><a href="#tochigi">枥木县</a></li>
+            <li class="nav-item"><a href="#transport">交通指南</a></li>
+        </ul>
+    </div>
+
+    <!-- 各县展示区 -->
+    <div class="regions-section">
+        <div class="container">
+            <!-- 神奈川县 -->
+            <div class="region-card" id="kanagawa">
+                <div class="region-header">
+                    <div class="region-icon">
+                        <i class="bi bi-building"></i>
+                    </div>
+                    <h3 class="region-title">神奈川县</h3>
+                    <span class="region-distance"><i class="bi bi-subway"></i> 距东京约30-60分钟</span>
+                </div>
+                <div class="region-body">
+                    <div class="region-img-container">
+                        <img src="img/kanagawa.jpg" alt="神奈川县风光" class="region-img">
+                    </div>
+                    <div class="region-info">
+                        <p class="region-desc">
+                            神奈川县位于东京南部，是东京周边最受欢迎的短途旅行目的地之一。县内的镰仓市是日本古都，拥有众多寺庙与神社；箱根则是著名的温泉胜地，可远眺富士山；横滨作为日本重要港口城市，展现了东西方文化的交融。
+                        </p>
+                        <div class="region-highlights">
+                            <h4 class="highlight-title"><i class="bi bi-star-fill"></i> 必游景点</h4>
+                            <div class="highlight-list">
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 镰仓大佛</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 箱根温泉</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 横滨中华街</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 江之岛</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 镰仓高校前站（灌篮高手取景地）</span>
+                            </div>
+                        </div>
+                        <div class="region-tips">
+                            <p><i class="bi bi-lightbulb"></i> 推荐行程：镰仓+江之岛一日游（JR横须贺线可达）；箱根建议住一晚，体验温泉与富士山日出。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 静冈县 -->
+            <div class="region-card" id="shizuoka">
+                <div class="region-header">
+                    <div class="region-icon">
+                        <i class="bi bi-mountain"></i>
+                    </div>
+                    <h3 class="region-title">静冈县</h3>
+                    <span class="region-distance"><i class="bi bi-train"></i> 距东京约2小时</span>
+                </div>
+                <div class="region-body">
+                    <div class="region-img-container">
+                        <img src="img/shizuoka.jpg" alt="静冈县风光" class="region-img">
+                    </div>
+                    <div class="region-info">
+                        <p class="region-desc">
+                            静冈县位于东京西南，因富士山北麓而闻名，是观赏富士山全景的最佳地点之一。县内不仅有壮丽的自然景观，还是日本重要的茶叶产区（静冈茶）和樱桃产区，同时拥有伊豆半岛等热门度假胜地。
+                        </p>
+                        <div class="region-highlights">
+                            <h4 class="highlight-title"><i class="bi bi-star-fill"></i> 必游景点</h4>
+                            <div class="highlight-list">
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 富士山五合目</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 伊豆温泉乡</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 清水寺（静冈市）</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 御前崎灯塔</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 久能山东照宫</span>
+                            </div>
+                        </div>
+                        <div class="region-tips">
+                            <p><i class="bi bi-lightbulb"></i> 推荐行程：富士山一日游（从新富士站乘坐巴士上山）；伊豆半岛适合3天2晚深度游，体验温泉与海岸风光。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 千叶县 -->
+            <div class="region-card" id="chiba">
+                <div class="region-header">
+                    <div class="region-icon">
+                        <i class="bi bi-umbrella-beach"></i>
+                    </div>
+                    <h3 class="region-title">千叶县</h3>
+                    <span class="region-distance"><i class="bi bi-subway"></i> 距东京约30-90分钟</span>
+                </div>
+                <div class="region-body">
+                    <div class="region-img-container">
+                        <img src="img/chiba.jpg" alt="千叶县风光" class="region-img">
+                    </div>
+                    <div class="region-info">
+                        <p class="region-desc">
+                            千叶县位于东京东部，临太平洋，拥有广阔的海岸线与丰富的自然景观。这里是东京周边的“休闲乐园”，既有迪士尼度假区这样的主题公园，也有铫子市等宁静的渔港小镇，同时还是日本重要的花卉产区。
+                        </p>
+                        <div class="region-highlights">
+                            <h4 class="highlight-title"><i class="bi bi-star-fill"></i> 必游景点</h4>
+                            <div class="highlight-list">
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 东京迪士尼乐园/迪士尼海洋</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 成田山新胜寺</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 南房总半岛</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 幕张海滨公园</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 佐原老街</span>
+                            </div>
+                        </div>
+                        <div class="region-tips">
+                            <p><i class="bi bi-lightbulb"></i> 推荐行程：迪士尼乐园一日游（京成电铁直达）；成田山新胜寺+成田机场周边半日游（适合转机间隙）。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 埼玉县 -->
+            <div class="region-card" id="saitama">
+                <div class="region-header">
+                    <div class="region-icon">
+                        <i class="bi bi-tree"></i>
+                    </div>
+                    <h3 class="region-title">埼玉县</h3>
+                    <span class="region-distance"><i class="bi bi-subway"></i> 距东京约30-60分钟</span>
+                </div>
+                <div class="region-body">
+                    <div class="region-img-container">
+                        <img src="img/saitama.jpg" alt="埼玉县风光" class="region-img">
+                    </div>
+                    <div class="region-info">
+                        <p class="region-desc">
+                            埼玉县位于东京北部，是东京的“后花园”，以丰富的绿地与历史遗迹著称。县内的秩父地区拥有壮丽的溪谷与温泉，川越市则保留了江户时期的老街风貌，被称为“小江户”，是感受传统日本风情的好去处。
+                        </p>
+                        <div class="region-highlights">
+                            <h4 class="highlight-title"><i class="bi bi-star-fill"></i> 必游景点</h4>
+                            <div class="highlight-list">
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 川越老街</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 秩父峡谷</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 羊山公园（芝樱）</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 武藏丘陵森林公园</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 鹫宫神社</span>
+                            </div>
+                        </div>
+                        <div class="region-tips">
+                            <p><i class="bi bi-lightbulb"></i> 推荐行程：川越小江户一日游（东武铁道川越线）；4-5月羊山公园芝樱季不可错过。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 枥木县 -->
+            <div class="region-card" id="tochigi">
+                <div class="region-header">
+                    <div class="region-icon">
+                        <i class="bi bi-castle"></i>
+                    </div>
+                    <h3 class="region-title">枥木县</h3>
+                    <span class="region-distance"><i class="bi bi-train"></i> 距东京约1.5-2小时</span>
+                </div>
+                <div class="region-body">
+                    <div class="region-img-container">
+                        <img src="img/tochigi.jpg" alt="枥木县风光" class="region-img">
+                    </div>
+                    <div class="region-info">
+                        <p class="region-desc">
+                            枥木县位于东京以北，是日本著名的历史文化与自然观光县。县内的日光市拥有世界文化遗产“日光东照宫”，建筑雕刻精美绝伦；那须高原则是夏季避暑、冬季滑雪的热门胜地，同时也是温泉资源丰富的区域。
+                        </p>
+                        <div class="region-highlights">
+                            <h4 class="highlight-title"><i class="bi bi-star-fill"></i> 必游景点</h4>
+                            <div class="highlight-list">
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 日光东照宫</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 日光二荒山神社</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 那须高原</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 宇都宫城址公园</span>
+                                <span class="highlight-tag"><i class="bi bi-geo-alt"></i> 盐原温泉乡</span>
+                            </div>
+                        </div>
+                        <div class="region-tips">
+                            <p><i class="bi bi-lightbulb"></i> 推荐行程：日光世界遗产一日游（JR日光线）；那须高原适合2天1晚度假，体验温泉与高原风光。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 交通指南 -->
+    <div class="transport-section" id="transport">
+        <div class="container">
+            <div class="section-heading">
+                <h2>东京周边交通指南</h2>
+                <p>从东京出发前往周边各县的主要交通方式与实用贴士</p>
+            </div>
+            <div class="transport-cards">
+                <!-- JR线 -->
+                <div class="transport-card">
+                    <div class="transport-icon">
+                        <i class="bi bi-train-front"></i>
+                    </div>
+                    <h4 class="transport-title">JR线</h4>
+                    <p class="transport-desc">
+                        覆盖范围最广，可直达神奈川（镰仓、横滨）、埼玉、千叶等县。推荐购买“JR东日本通票”，适合一日内多次乘坐JR线路的游客。
+                    </p>
+                </div>
+                <!-- 私铁 -->
+                <div class="transport-card">
+                    <div class="transport-icon">
+                        <i class="bi bi-tram"></i>
+                    </div>
+                    <h4 class="transport-title">私铁</h4>
+                    <p class="transport-desc">
+                        东武、西武、京成等私铁公司运营多条线路，连接东京与周边各县。部分线路推出“一日券”，性价比高（如东武日光线、京成成田线）。
+                    </p>
+                </div>
+                <!-- 高速巴士 -->
+                <div class="transport-card">
+                    <div class="transport-icon">
+                        <i class="bi bi-bus-front"></i>
+                    </div>
+                    <h4 class="transport-title">高速巴士</h4>
+                    <p class="transport-desc">
+                        价格低廉，适合预算有限的游客，可前往箱根、富士山等景点。需提前在巴士站或网上预约座位，节假日容易满座。
+                    </p>
+                </div>
+                <!-- 自驾 -->
+                <div class="transport-card">
+                    <div class="transport-icon">
+                        <i class="bi bi-car-front"></i>
+                    </div>
+                    <h4 class="transport-title">自驾</h4>
+                    <p class="transport-desc">
+                        灵活性高，适合前往公共交通不便的山区或海滨。日本租车需国际驾照，高速公路收费较高，建议提前熟悉路况。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <div class="back-top" id="backTop">
+        <i class="bi bi-arrow-up"></i>
+    </div>
+
+    <!-- 页脚 -->
+    <footer style="background-color: #343a40; color: white; padding: 30px 0;">
+        <div class="container text-center">
+            <p>© 2025 东京旅游指南 | 涵总版权所有</p>
+            <p class="mt-2" style="font-size: 14px; opacity: 0.8;">
+                <a href="index.html" style="color: white; margin: 0 10px;">首页</a>
+                <a href="faq.html" style="color: white; margin: 0 10px;">常见问题</a>
+                <a href="#" style="color: white; margin: 0 10px;">联系我们</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- 脚本 -->
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script>
+        // 导航栏滚动效果
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) {
+                $('.fixed-top').css('background-color', 'rgba(0,0,0,0.9)');
+            } else {
+                $('.fixed-top').css('background-color', 'rgba(0,0,0,0.8)');
+            }
+
+            // 显示/隐藏返回顶部按钮
+            if ($(this).scrollTop() > 500) {
+                $('#backTop').addClass('show');
+            } else {
+                $('#backTop').removeClass('show');
+            }
+
+            // 区域导航激活状态
+            const scrollPos = $(window).scrollTop() + 100;
+            $('.nav-list a').each(function() {
+                const target = $(this.getAttribute('href'));
+                if (target.length && target.position().top <= scrollPos && target.position().top + target.height() > scrollPos) {
+                    $('.nav-list a').removeClass('active');
+                    $(this).addClass('active');
+                }
+            });
+        });
+
+        // 返回顶部功能
+        $('#backTop').click(function() {
+            $('html, body').animate({scrollTop: 0}, 500);
+        });
+
+        // 区域导航平滑滚动
+        $('.nav-list a').click(function(e) {
+            e.preventDefault();
+            const targetId = $(this).attr('href');
+            const targetPos = $(targetId).offset().top - 80; // 减去导航栏高度
+            $('html, body').animate({scrollTop: targetPos}, 500);
+        });
+
+        // 页面加载时触发滚动检查
+        $(window).trigger('scroll');
+
+        console.log("涵总版权所有");
+    </script>
+</body>
+</html>

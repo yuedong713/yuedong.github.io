@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>日本旅游出行必备物品</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <style>
+        .essential-item {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        .essential-img {
+            width: 100%;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        .back-home {
+            margin: 2rem 0;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="fixed-top" style="background-color: rgba(0, 0, 0, 0.8);">
+        <nav class="navbar navbar-expand-xl navbar-dark">
+            <a class="navbar-brand ml-5" href="index.html"><img src="img/logo-public.png"></a>
+            <button type="button" class="btn btn-secondary navbar-toggler" data-toggle="collapse" data-target="#sample1">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="sample1">
+                <ul class="navbar-nav px-5 mr-5">
+                    <li class="nav-item mr-4"><a href="introduce.html" class="nav-link text-white">东京美景</a></li>
+                    <li class="nav-item mr-4"><a href="shop.html" class="nav-link text-white">东京美食</a></li>
+                    <li class="nav-item mr-4 dropdown">
+                        <a href="#" class="nav-link dropdown-toggle text-white" data-toggle="dropdown">互动</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="dropdown-item">微博</a></li>
+                            <li><a href="#" class="dropdown-item">微信</a></li>
+                            <li><a href="#" class="dropdown-item">客服</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item mr-4"><a href="#" class="nav-link text-white">下载照片</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- 主体内容 -->
+    <div class="container mt-20 pt-15">
+        <h2 class="text-center mb-5">日本旅游出行必备物品</h2>
+        
+        <!-- 返回主页按钮 -->
+        <a href="index.html" class="back-home btn btn-dark">
+            <i class="bi bi-arrow-left mr-2"></i>返回主页
+        </a>
+
+        <!-- 必备物品列表 -->
+        <div class="row">
+            <!-- 护照签证 -->
+            <div class="col-md-6 essential-item">
+                <img src="img/essential1.jpg" class="essential-img" alt="护照与签证">
+                <h4><i class="bi bi-passport mr-2 text-primary"></i>护照与签证</h4>
+                <p class="text-secondary">
+                    日本旅游必备证件，确保护照有效期超过计划回国日期6个月以上，签证需提前办理并确认有效期。建议准备复印件或电子版备份。
+                </p>
+            </div>
+
+            <!-- 电源适配器 -->
+            <div class="col-md-6 essential-item">
+                <img src="img/essential2.jpg" class="essential-img" alt="电源适配器">
+                <h4><i class="bi bi-plug mr-2 text-primary"></i>电源适配器</h4>
+                <p class="text-secondary">
+                    日本电源为100V，插头为两脚扁型（A型），国内两孔插头可直接使用，三孔设备需准备转换插头。
+                </p>
+            </div>
+
+            <!-- 随身WiFi -->
+            <div class="col-md-6 essential-item">
+                <img src="img/essential3.jpg" class="essential-img" alt="随身WiFi">
+                <h4><i class="bi bi-wifi mr-2 text-primary"></i>随身WiFi/ SIM卡</h4>
+                <p class="text-secondary">
+                    提前租赁随身WiFi或购买日本本地SIM卡，方便导航和通讯。推荐覆盖范围广的运营商如Docomo、SoftBank。
+                </p>
+            </div>
+
+            <!-- 转换插头 -->
+            <div class="col-md-6 essential-item">
+                <img src="img/essential4.jpg" class="essential-img" alt="日元现金">
+                <h4><i class="bi bi-cash mr-2 text-primary"></i>日元现金</h4>
+                <p class="text-secondary">
+                    日本很多小店、餐馆只接受现金，建议提前兑换适量日元。大型商场和酒店支持信用卡，部分地方可使用支付宝/微信。
+                </p>
+            </div>
+
+            <!-- 轻便雨具 -->
+            <div class="col-md-6 essential-item">
+                <img src="img/essential5.jpg" class="essential-img" alt="轻便雨具">
+                <h4><i class="bi bi-umbrella mr-2 text-primary"></i>轻便雨具</h4>
+                <p class="text-secondary">
+                    日本天气多变，尤其是梅雨季节（6-7月），建议携带折叠伞或一次性雨衣，方便随身携带。
+                </p>
+            </div>
+
+            <!-- 舒适鞋子 -->
+            <div class="col-md-6 essential-item">
+                <img src="img/essential6.jpg" class="essential-img" alt="舒适鞋子">
+                <h4><i class="bi bi-shoe-prints mr-2 text-primary"></i>舒适鞋子</h4>
+                <p class="text-secondary">
+                    日本旅游多以步行为主，尤其是在东京、京都等城市游览景点时，舒适的运动鞋是必备品。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script>
+        console.log("涵总版权所有")
+    </script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>东京 - 涉谷专题</title>
+    <!-- 引用与首页一致的样式文件，保持风格统一 -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <!-- 新增涉谷专题页专属样式 -->
+    <style>
+        /* 顶部Banner样式 */
+        .shibuya-banner {
+            height: 400px;
+            background: url(img/shibuya-banner.jpg) center center no-repeat;
+            background-size: cover;
+            position: relative;
+            margin-top: 80px; /* 适配固定导航栏 */
+        }
+        .banner-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .banner-title {
+            color: white;
+            font-size: 48px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        /* 景点卡片样式 */
+        .spot-card {
+            border: none;
+            transition: transform 0.3s ease;
+        }
+        .spot-card:hover {
+            transform: translateY(-5px);
+        }
+        .spot-img {
+            height: 220px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+        }
+        .spot-tag {
+            display: inline-block;
+            padding: 3px 8px;
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 12px;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+        /* 返回顶部按钮 */
+        .back-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #343a40;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .back-top.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏（与首页一致，支持返回主页） -->
+    <div class="fixed-top" style="background-color: rgba(0, 0, 0, 0.8);">
+        <nav class="navbar navbar-expand-xl navbar-dark">
+            <a class="navbar-brand ml-5" href="index.html">
+                <img src="img/logo-public.png" alt="东京旅游" style="height: 50px;">
+            </a>
+            <button type="button" class="btn btn-secondary navbar-toggler" data-toggle="collapse" data-target="#shibuyaNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="shibuyaNav">
+                <ul class="navbar-nav px-5 mr-5">
+                    <li class="nav-item mr-4"><a href="index.html" class="nav-link text-white">首页</a></li>
+                    <li class="nav-item mr-4"><a href="introduce.html" class="nav-link text-white">东京美景</a></li>
+                    <li class="nav-item mr-4"><a href="shop.html" class="nav-link text-white">东京美食</a></li>
+            </div>
+        </nav>
+    </div>
+
+    <!-- 顶部Banner -->
+    <div class="shibuya-banner">
+        <div class="banner-mask">
+            <h1 class="banner-title">涉谷 · 东京活力心脏</h1>
+        </div>
+    </div>
+
+    <!-- 区域介绍 -->
+    <div class="container mt-8 mb-6">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <h2 class="text-center mb-4" style="color: #343a40;">关于涉谷</h2>
+                <p class="text-muted text-center mb-6" style="font-size: 16px; line-height: 1.8;">
+                    涉谷位于东京都涩谷区，是东京最繁华的商业与娱乐中心之一。这里以全球最繁忙的“涉谷十字路口”闻名，
+                    每天约有3000人同时过马路；同时聚集了潮流店铺、美食餐厅、娱乐设施，是年轻人追逐时尚的胜地，
+                    也是感受东京快节奏生活的必访之地。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 涉谷景点展示（2列/3列自适应） -->
+    <div class="container mb-10">
+        <h2 class="text-center mb-8" style="color: #343a40;">涉谷必游景点</h2>
+        
+        <!-- 景点1：涉谷十字路口 -->
+        <div class="row mb-10">
+            <div class="col-lg-6 col-md-12">
+                <img src="img/shibuya-crossing.jpg" alt="涉谷十字路口" class="img-fluid rounded shadow-lg" style="width: 100%;">
+            </div>
+            <div class="col-lg-6 col-md-12 mt-4 mt-lg-0 d-flex flex-column justify-center">
+                <span class="spot-tag">地标必访</span>
+                <h3 class="mb-3" style="color: #343a40;">涉谷十字路口</h3>
+                <p class="text-muted mb-4" style="line-height: 1.8;">
+                    被誉为“全球最繁忙的十字路口”，每次信号灯切换时，来自四个方向的行人流交织而过，场面十分壮观。
+                    推荐到路口旁的“星巴克涉谷道玄坂店”二楼，或“涉谷Scramble Square”观景台，俯瞰完整的十字路口全景。
+                </p>
+                <div class="d-flex align-items-center text-muted">
+                    <i class="bi bi-map-marker-fill mr-2" style="color: #ff6b6b;"></i>
+                    <span>东京都涩谷区涉谷2-2-1</span>
+                    <span class="mx-3">|</span>
+                    <i class="bi bi-clock mr-2" style="color: #ff6b6b;"></i>
+                    <span>全天开放（观景台9:00-23:00）</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 景点2：涉谷109 -->
+        <div class="row mb-10 flex-column-reverse flex-lg-row">
+            <div class="col-lg-6 col-md-12 mt-4 mt-lg-0 d-flex flex-column justify-center">
+                <span class="spot-tag">潮流购物</span>
+                <h3 class="mb-3" style="color: #343a40;">涉谷109</h3>
+                <p class="text-muted mb-4" style="line-height: 1.8;">
+                    涉谷109是东京标志性的潮流百货，以年轻女性时尚为主，聚集了众多日系少女品牌、独立设计师店铺。
+                    商场共10层，从服装、配饰到美妆一应俱全，是感受日本“涉谷系”时尚的核心地点，顶楼还能眺望涉谷街景。
+                </p>
+                <div class="d-flex align-items-center text-muted">
+                    <i class="bi bi-map-marker-fill mr-2" style="color: #ff6b6b;"></i>
+                    <span>东京都涩谷区道玄坂2-29-1</span>
+                    <span class="mx-3">|</span>
+                    <i class="bi bi-clock mr-2" style="color: #ff6b6b;"></i>
+                    <span>10:00-21:00（周日10:00-20:00）</span>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <img src="img/shibuya-109.jpg" alt="涉谷109" class="img-fluid rounded shadow-lg" style="width: 100%;">
+            </div>
+        </div>
+
+        <!-- 景点3-4：卡片式展示 -->
+        <div class="row">
+            <!-- 景点3：忠犬八公像 -->
+            <div class="col-lg-6 col-md-6 mb-6">
+                <div class="card spot-card shadow-lg">
+                    <img src="img/shibuya-hachiko.jpg" alt="忠犬八公像" class="card-img-top spot-img">
+                    <div class="card-body">
+                        <span class="spot-tag">历史纪念</span>
+                        <h5 class="card-title mt-2" style="color: #343a40;">忠犬八公像</h5>
+                        <p class="card-text text-muted mt-2" style="line-height: 1.6;">
+                            位于涉谷站东口，纪念著名的忠犬“八公”。八公每天在涉谷站等待主人下班，主人去世后仍坚持等待10年，
+                            成为忠诚的象征。如今这里是涉谷的热门打卡点，也是朋友约会的经典集合地。
+                        </p>
+                        <div class="text-muted mt-3" style="font-size: 14px;">
+                            <i class="bi bi-map-marker-fill mr-1" style="color: #ff6b6b;"></i>
+                            东京都涩谷区涉谷1-2-3（涉谷站东口）
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 景点4：涉谷Sky（Scramble Square） -->
+            <div class="col-lg-6 col-md-6 mb-6">
+                <div class="card spot-card shadow-lg">
+                    <img src="img/shibuya-sky.jpg" alt="涉谷Sky" class="card-img-top spot-img">
+                    <div class="card-body">
+                        <span class="spot-tag">观景胜地</span>
+                        <h5 class="card-title mt-2" style="color: #343a40;">涉谷Sky（Scramble Square）</h5>
+                        <p class="card-text text-muted mt-2" style="line-height: 1.6;">
+                            涉谷最新地标建筑，顶层设有“Sky Deck”露天观景台和“Sky Gallery”室内观景层，
+                            可360度俯瞰东京全景，尤其夜晚灯光璀璨时，能将涉谷、新宿、东京塔等夜景尽收眼底。
+                        </p>
+                        <div class="text-muted mt-3" style="font-size: 14px;">
+                            <i class="bi bi-map-marker-fill mr-1" style="color: #ff6b6b;"></i>
+                            东京都涩谷区涉谷2-21-1（涉谷站南口）
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <div class="back-top" id="backTop">
+        <i class="bi bi-arrow-up"></i>
+    </div>
+
+    <!-- 页脚（与首页一致） -->
+    <footer style="background-color: #343a40; color: white; padding: 30px 0;">
+        <div class="container text-center">
+            <p>© 2025 东京旅游指南 | 涵总版权所有</p>
+            <p class="mt-2" style="font-size: 14px; opacity: 0.8;">
+                <a href="index.html" style="color: white; margin: 0 10px;">首页</a>
+                <a href="faq.html" style="color: white; margin: 0 10px;">常见问题</a>
+                <a href="#" style="color: white; margin: 0 10px;">联系我们</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- 引用脚本（与首页一致，确保交互正常） -->
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script>
+        // 导航栏滚动效果（与首页一致）
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) {
+                $('.fixed-top').css('background-color', 'rgba(0,0,0,0.9)');
+            } else {
+                $('.fixed-top').css('background-color', 'rgba(0,0,0,0.8)');
+            }
+
+            // 返回顶部按钮显示/隐藏
+            if ($(this).scrollTop() > 300) {
+                $('#backTop').addClass('show');
+            } else {
+                $('#backTop').removeClass('show');
+            }
+        });
+
+        // 返回顶部功能
+        $('#backTop').click(function() {
+            $('html, body').animate({scrollTop: 0}, 500);
+        });
+
+        console.log("涵总版权所有");
+    </script>
+</body>
+</html>

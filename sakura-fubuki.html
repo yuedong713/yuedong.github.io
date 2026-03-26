@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今年有大概率发生樱吹雪 - 东京旅游指南</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <style>
+        /* 基础样式 */
+        body {
+            color: #333;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        /* 导航栏 */
+        .navbar {
+            background-color: #f8bbd0;
+            box-shadow: 0 2px 10px rgba(255,105,180,0.1);
+        }
+        .navbar-brand img {
+            height: 50px;
+        }
+        .nav-link {
+            color: #880e4f !important;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .nav-link:hover {
+            color: #c2185b !important;
+            transform: translateY(-2px);
+        }
+        
+        /* 新闻头部 */
+        .news-header {
+            background: linear-gradient(rgba(255,224,230,0.9), rgba(255,224,230,0.7)), url('img/fubuki-header.jpg') center center no-repeat;
+            background-size: cover;
+            margin-top: 70px;
+            padding: 60px 0;
+            position: relative;
+        }
+        .news-badge {
+            background-color: #e91e63;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        .news-title {
+            font-size: 38px;
+            color: #880e4f;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        .news-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            color: #6a1b9a;
+            font-size: 14px;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+        }
+        .meta-item i {
+            margin-right: 8px;
+        }
+        
+        /* 新闻内容区 */
+        .news-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .news-content p {
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+        .news-content strong {
+            color: #c2185b;
+        }
+        
+        /* 重点区块 */
+        .highlight-box {
+            background-color: #fff3e0;
+            border-left: 5px solid #ff9800;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .highlight-title {
+            color: #e65100;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .highlight-title i {
+            margin-right: 10px;
+        }
+        
+        /* 专家观点区 */
+        .expert-opinion {
+            background-color: #fce4ec;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 40px 0;
+            position: relative;
+        }
+        .expert-opinion::before {
+            content: """;
+            font-size: 80px;
+            color: rgba(233,30,99,0.2);
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            font-family: Georgia, serif;
+        }
+        .expert-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .expert-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #f8bbd0;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #880e4f;
+            font-size: 24px;
+        }
+        .expert-info h4 {
+            margin: 0;
+            color: #880e4f;
+            font-size: 18px;
+        }
+        .expert-title {
+            color: #7b1fa2;
+            font-size: 14px;
+        }
+        
+        /* 数据图表区 */
+        .data-section {
+            margin: 40px 0;
+        }
+        .data-title {
+            color: #880e4f;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        .data-chart {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .chart-bar {
+            height: 30px;
+            background-color: #f48fb1;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+        .chart-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ec407a, #e91e63);
+            border-radius: 5px;
+        }
+        .chart-label {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: bold;
+            z-index: 10;
+        }
+        .chart-value {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        /* 赏樱小贴士 */
+        .tips-section {
+            background-color: #f3e5f5;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 40px 0;
+        }
+        .tips-title {
+            color: #6a1b9a;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 22px;
+            text-align: center;
+        }
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .tip-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        .tip-icon {
+            color: #8e24aa;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .tip-title {
+            color: #4a148c;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .tip-text {
+            font-size: 14px;
+            color: #5d4037;
+        }
+        
+        /* 图片展示区 */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .gallery-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        .gallery-img:hover {
+            transform: scale(1.03);
+        }
+        
+        /* 返回顶部按钮 */
+        .back-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #e91e63;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+        .back-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: #880e4f;
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        footer a {
+            color: #ffccbc;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .news-title {
+                font-size: 28px;
+            }
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+            .news-header {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-xl fixed-top">
+        <a class="navbar-brand ml-5" href="index.html">
+            <img src="img/logo-public.png" alt="东京旅游" class="d-inline-block align-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#fubukiNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="fubukiNav">
+            <ul class="navbar-nav px-5 mr-5">
+                <li class="nav-item mr-4"><a href="index.html" class="nav-link">首页</a></li>
+                <li class="nav-item mr-4"><a href="tokyo-attractions.html" class="nav-link">热门景点</a></li>
+                <li class="nav-item mr-4"><a href="shop.html" class="nav-link">东京美食</a></li>
+                <li class="nav-item mr-4"><a href="odaiba.html" class="nav-link">台场专题</a></li>
+                <li class="nav-item mr-4"><a href="shibuya.html" class="nav-link">涉谷专题</a></li>
+                <li class="nav-item mr-4"><a href="marunouchi.html" class="nav-link">大手町·丸之内</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 新闻头部 -->
+    <div class="news-header">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <span class="news-badge">气象预警 × 樱花特报</span>
+                    <h1 class="news-title">今年樱吹雪概率高达78%！日本气象厅：史上最"粉"的春天要来了</h1>
+                    <div class="news-meta">
+                        <div class="meta-item"><i class="bi bi-calendar"></i> 2025年2月28日 10:30</div>
+                        <div class="meta-item"><i class="bi bi-person"></i> 记者：涵神</div>
+                        <div class="meta-item"><i class="bi bi-building"></i> 东京气象新闻社</div>
+                        <div class="meta-item"><i class="bi bi-eye"></i> 阅读量：12,587</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新闻内容 -->
+    <div class="news-container">
+        <div class="news-content">
+            <p>东京气象厅与日本樱花协会联合发布的最新报告显示，受特殊气候影响，2025年东京及周边地区将迎来<strong>近十年最强樱吹雪现象</strong>，发生概率高达78%，较往年平均值（42%）几乎翻倍。这意味着今年赏樱的游客有极大可能亲身经历"漫天粉雪"的梦幻场景。</p>
+            
+            <p>"樱吹雪"是日本对樱花花瓣随风飘落景象的诗意描述，通常发生在樱花满开后的3-5天。今年由于春季气温波动较大（日间高温加速樱花成熟，夜间凉风促进花瓣脱落），加上预计4月初将有3-4次弱冷空气过境，共同造就了这一罕见的"高吹雪概率"。</p>
+            
+            <div class="highlight-box">
+                <h3 class="highlight-title"><i class="bi bi-lightbulb"></i> 小知识：什么是"樱吹雪指数"？</h3>
+                <p>这是日本气象厅2018年推出的专业指数，综合花瓣附着力、风速、湿度等12项指标计算得出。指数超过60即判定为"高概率樱吹雪"，而今年东京的预测指数高达<strong>83分</strong>，属于"极易发生且强度高"等级——简单说，就是花瓣会像下雪一样密集飘落！</p>
+            </div>
+            
+            <div class="image-gallery">
+                <img src="img/fubuki-1.jpg" alt="樱吹雪场景1" class="gallery-img">
+                <img src="img/fubuki-2.jpg" alt="樱吹雪场景2" class="gallery-img">
+            </div>
+            
+            <p>上野公园的樱花观测员田中久美子在接受采访时兴奋地表示："去年整个樱花季只出现了2次短暂的樱吹雪，而今年可能每2-3天就会发生一次。特别是清晨和傍晚时分，微风拂过，粉色花瓣如细雨般飘落，那种美简直让人窒息。"</p>
+            
+            <!-- 专家观点 -->
+            <div class="expert-opinion">
+                <div class="expert-header">
+                    <div class="expert-avatar">
+                        <i class="bi bi-cloud"></i>
+                    </div>
+                    <div class="expert-info">
+                        <h4>松本气象博士（东京大学气候研究所）</h4>
+                        <div class="expert-title">樱花气候学权威</div>
+                    </div>
+                </div>
+                <p>"今年的气候条件对樱吹雪非常'友好'——日间20-22℃的温度会让花瓣达到最佳成熟度，而夜间10-12℃的温差会使花萼连接处变得脆弱。再加上4月2日和5日的两次东北风，将形成完美的'吹雪组合'。不过要提醒游客，强吹雪可能导致樱花花期缩短3-4天，想赏花得抓紧时间！"</p>
+            </div>
+            
+            <!-- 数据图表 -->
+            <div class="data-section">
+                <h3 class="data-title">东京各区域樱吹雪概率预测</h3>
+                <div class="data-chart">
+                    <div class="chart-bar">
+                        <div class="chart-fill" style="width: 85%;"></div>
+                        <div class="chart-label">上野公园</div>
+                        <div class="chart-value">85%</div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-fill" style="width: 78%;"></div>
+                        <div class="chart-label">新宿御苑</div>
+                        <div class="chart-value">78%</div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-fill" style="width: 92%;"></div>
+                        <div class="chart-label">千鸟渊</div>
+                        <div class="chart-value">92%</div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-fill" style="width: 72%;"></div>
+                        <div class="chart-label">隅田川沿岸</div>
+                        <div class="chart-value">72%</div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="chart-fill" style="width: 65%;"></div>
+                        <div class="chart-label">明治神宫</div>
+                        <div class="chart-value">65%</div>
+                    </div>
+                </div>
+                <p style="font-size: 14px; color: #666; text-align: center;">数据来源：东京气象厅2025年3月樱花专项报告</p>
+            </div>
+            
+            <p>值得一提的是，千鸟渊由于河道走向与春季盛行风向一致，加上两岸樱花树密度高，成为今年樱吹雪概率最高的地点（92%）。当地观光协会已提前准备了"樱吹雪观赏船"，游客可乘船在粉色花瓣雨中穿行，体验堪称"现实版动漫场景"。</p>
+            
+            <p>不过樱吹雪也给东京带来了一些有趣的"小麻烦"：东京地铁已开始培训员工如何快速清理站台上堆积的樱花花瓣；上野公园周边的咖啡店推出了"防花瓣菜单"——用特制盖子保护咖啡不被飘落的樱花"污染"；甚至有商家推出了"樱吹雪保险"，承诺若游客在指定地点没看到樱吹雪可免费获得樱花甜点。</p>
+            
+            <!-- 赏樱小贴士 -->
+            <div class="tips-section">
+                <h3 class="tips-title">樱吹雪观赏终极指南</h3>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="bi bi-clock"></i>
+                        </div>
+                        <h4 class="tip-title">最佳时间</h4>
+                        <p class="tip-text">清晨7-9点和傍晚5-7点，风力适中且游客较少，光线最适合拍照</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="bi bi-camera"></i>
+                        </div>
+                        <h4 class="tip-title">拍照技巧</h4>
+                        <p class="tip-text">使用快门优先模式（1/500s以上），能拍出清晰的飘落瞬间</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="bi bi-umbrella"></i>
+                        </div>
+                        <h4 class="tip-title">装备建议</h4>
+                        <p class="tip-text">带透明雨伞（既挡花瓣又不影响视线），穿深色衣服更显花瓣</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">
+                            <i class="bi bi-wifi"></i>
+                        </div>
+                        <h4 class="tip-title">实时监测</h4>
+                        <p class="tip-text">关注"东京樱吹雪雷达"APP，实时推送各地点吹雪强度</p>
+                    </div>
+                </div>
+            </div>
+            
+            <p>最后提醒各位樱花爱好者：今年的樱吹雪虽美，但也意味着樱花花期可能缩短。建议提前规划行程，同时关注每日樱花状况更新。毕竟，能亲身见证这场"粉色暴风雪"的机会，可能要再等十年呢！</p>
+            
+            <p style="text-align: right; margin-top: 40px; color: #880e4f; font-style: italic;">
+                —— 愿你的镜头里，装满今年春天的粉色雪花
+            </p>
+        </div>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <div class="back-top" id="backTop">
+        <i class="bi bi-arrow-up"></i>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container text-center">
+            <p>© 2025 东京旅游指南 | 涵总版权所有</p>
+            <p class="mt-2" style="font-size: 14px; opacity: 0.8;">
+                <a href="index.html">首页</a>
+                <a href="faq.html">常见问题</a>
+                <a href="#">联系我们</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script>
+        // 滚动效果
+        $(window).scroll(function() {
+            // 导航栏变化
+            if ($(this).scrollTop() > 50) {
+                $('.navbar').css('background-color', '#e91e63');
+                $('.nav-link').css('color', 'white !important');
+            } else {
+                $('.navbar').css('background-color', '#f8bbd0');
+                $('.nav-link').css('color', '#880e4f !important');
+            }
+            
+            // 返回顶部按钮
+            if ($(this).scrollTop() > 500) {
+                $('#backTop').addClass('show');
+            } else {
+                $('#backTop').removeClass('show');
+            }
+        });
+        
+        // 返回顶部功能
+        $('#backTop').click(function() {
+            $('html, body').animate({scrollTop: 0}, 500);
+        });
+        
+        console.log("涵总版权所有");
+    </script>
+</body>
+</html>

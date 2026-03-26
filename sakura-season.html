@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>东京樱花季 - 赏樱全指南</title>
+    <!-- 引入外部资源 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <style>
+        /* 基础样式 */
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            color: #333;
+            background-color: #f8f7f4;
+            line-height: 1.7;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 1rem 0;
+        }
+
+        .back-link {
+            color: #d4af37; /* 樱花金 */
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .back-link i {
+            margin-right: 8px;
+        }
+
+        .back-link:hover {
+            color: #b8860b;
+            transform: translateX(-3px);
+        }
+
+        /* 头部横幅 */
+        .hero-banner {
+            width: 100%;
+            height: 50vh;
+            min-height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7));
+        }
+
+        .banner-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .banner-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .banner-subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* 赏樱地点区域 */
+        .sakura-spots {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-size: 2.2rem;
+            color: #2c3e50;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #d4af37;
+            margin: 1rem auto 0;
+        }
+
+        /* 地点卡片 */
+        .spot-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .spot-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+        }
+
+        .spot-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .spot-info {
+            padding: 1.8rem;
+        }
+
+        .spot-name {
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+        }
+
+        .spot-name i {
+            color: #d4af37;
+            margin-right: 10px;
+        }
+
+        .spot-detail {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .spot-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .meta-item i {
+            margin-right: 5px;
+            color: #d4af37;
+        }
+
+        /* 赏樱小贴士 */
+        .tips-section {
+            background-color: #f0ece2;
+            padding: 4rem 0;
+        }
+
+        .tips-container {
+            background: white;
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .tips-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+        }
+
+        .tips-title i {
+            color: #d4af37;
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .tips-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tip-item {
+            padding: 1.5rem;
+            background-color: #f9f8f5;
+            border-radius: 8px;
+            border-left: 4px solid #d4af37;
+        }
+
+        .tip-icon {
+            font-size: 1.5rem;
+            color: #d4af37;
+            margin-bottom: 0.8rem;
+        }
+
+        .tip-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .tip-text {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: #2c3e50;
+            color: rgba(255,255,255,0.8);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .hero-banner {
+                height: 40vh;
+                min-height: 300px;
+            }
+
+            .banner-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .spot-img {
+                height: 220px;
+            }
+
+            .tips-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 - 返回首页 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="back-link">
+                <i class="fa fa-arrow-left"></i>
+                返回首页
+            </a>
+        </div>
+    </nav>
+
+    <!-- 头部横幅 -->
+    <div class="hero-banner">
+        <img src="img/sakura-hero.jpg" alt="东京樱花季" class="banner-img">
+        <div class="banner-overlay"></div>
+        <div class="banner-content">
+            <h1 class="banner-title">东京樱花季全指南</h1>
+            <p class="banner-subtitle">从三月末到四月初，这座城市被粉色花海温柔拥抱，每一处都藏着春天的浪漫</p>
+        </div>
+    </div>
+
+    <!-- 赏樱地点推荐 -->
+    <section class="sakura-spots">
+        <div class="container">
+            <h2 class="section-title">东京必去赏樱地</h2>
+            
+            <div class="row">
+                <!-- 上野公园 -->
+                <div class="col-lg-6">
+                    <div class="spot-card">
+                        <img src="img/ueno-sakura.jpg" alt="上野公园樱花" class="spot-img">
+                        <div class="spot-info">
+                            <h3 class="spot-name"><i class="fa fa-tree"></i>上野公园</h3>
+                            <p class="spot-detail">
+                                东京最著名的赏樱地之一，拥有1200多棵樱花树。夜晚灯光点亮樱花，形成梦幻的"夜樱"景观。公园内还有博物馆群，适合一边赏樱一边感受文化氛围。
+                            </p>
+                            <div class="spot-meta">
+                                <div class="meta-item"><i class="fa fa-map-marker"></i> 台东区上野公园</div>
+                                <div class="meta-item"><i class="fa fa-calendar"></i> 最佳时期：3月下旬-4月上旬</div>
+                                <div class="meta-item"><i class="fa fa-subway"></i>  JR上野站步行5分钟</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 目黑川 -->
+                <div class="col-lg-6">
+                    <div class="spot-card">
+                        <img src="img/meguro-sakura.jpg" alt="目黑川樱花" class="spot-img">
+                        <div class="spot-info">
+                            <h3 class="spot-name"><i class="fa fa-ship"></i>目黑川</h3>
+                            <p class="spot-detail">
+                                沿河两岸种植了约800棵樱花树，花瓣飘落时如粉色雪花覆盖水面，形成"樱花隧道"的绝美景观。傍晚时分，河畔的灯光与樱花交相辉映，浪漫至极。
+                            </p>
+                            <div class="spot-meta">
+                                <div class="meta-item"><i class="fa fa-map-marker"></i> 品川区目黑川沿岸</div>
+                                <div class="meta-item"><i class="fa fa-calendar"></i> 最佳时期：3月下旬-4月上旬</div>
+                                <div class="meta-item"><i class="fa fa-subway"></i> 东急东横线"目黑站"步行3分钟</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 千鸟渊 -->
+                <div class="col-lg-6">
+                    <div class="spot-card">
+                        <img src="img/chidorigafuchi.jpg" alt="千鸟渊樱花" class="spot-img">
+                        <div class="spot-info">
+                            <h3 class="spot-name"><i class="fa fa-pagelines"></i>千鸟渊</h3>
+                            <p class="spot-detail">
+                                皇居北侧的护城河沿岸种植了约1000棵樱花树，可乘坐小船在河中穿行，从独特视角欣赏樱花环绕的美景。夜樱点灯时，樱花倒映在水面，宛如仙境。
+                            </p>
+                            <div class="spot-meta">
+                                <div class="meta-item"><i class="fa fa-map-marker"></i> 千代田区九段南</div>
+                                <div class="meta-item"><i class="fa fa-calendar"></i> 最佳时期：3月下旬-4月上旬</div>
+                                <div class="meta-item"><i class="fa fa-subway"></i> 东京地铁"九段下站"步行7分钟</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 新宿御苑 -->
+                <div class="col-lg-6">
+                    <div class="spot-card">
+                        <img src="img/shinjuku-garden.jpg" alt="新宿御苑樱花" class="spot-img">
+                        <div class="spot-info">
+                            <h3 class="spot-name"><i class="fa fa-leaf"></i>新宿御苑</h3>
+                            <p class="spot-detail">
+                                融合了日本、英国和法国风格的皇家园林，拥有约1000棵樱花树，品种丰富。由于不同品种樱花花期不同，这里的赏樱时间可长达一个月左右。
+                            </p>
+                            <div class="spot-meta">
+                                <div class="meta-item"><i class="fa fa-map-marker"></i> 新宿区新宿御苑町</div>
+                                <div class="meta-item"><i class="fa fa-calendar"></i> 最佳时期：3月中旬-4月中旬</div>
+                                <div class="meta-item"><i class="fa fa-subway"></i>  JR新宿站步行10分钟</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 赏樱小贴士 -->
+    <section class="tips-section">
+        <div class="container">
+            <div class="tips-container">
+                <h2 class="tips-title"><i class="fa fa-lightbulb-o"></i>东京赏樱实用指南</h2>
+                
+                <div class="tips-list">
+                    <div class="tip-item">
+                        <div class="tip-icon"><i class="fa fa-calendar-check-o"></i></div>
+                        <h3 class="tip-title">最佳赏樱时间</h3>
+                        <p class="tip-text">东京樱花季通常在3月下旬至4月上旬，具体时间每年略有不同，建议提前1-2周查询当年的"樱花前线"预报。</p>
+                    </div>
+                    
+                    <div class="tip-item">
+                        <div class="tip-icon"><i class="fa fa-clock-o"></i></div>
+                        <h3 class="tip-title">避开人潮技巧</h3>
+                        <p class="tip-text">热门地点建议早晨7点前或傍晚前往，既能避开 crowds，又能欣赏到晨光或夕阳下的樱花美景。</p>
+                    </div>
+                    
+                    <div class="tip-item">
+                        <div class="tip-icon"><i class="fa fa-cutlery"></i></div>
+                        <h3 class="tip-title">赏樱美食</h3>
+                        <p class="tip-text">推荐尝试樱花季限定美食：樱饼、樱花味鲷鱼烧、樱花啤酒等，部分公园可自带野餐垫进行"花见"野餐。</p>
+                    </div>
+                    
+                    <div class="tip-item">
+                        <div class="tip-icon"><i class="fa fa-camera"></i></div>
+                        <h3 class="tip-title">摄影技巧</h3>
+                        <p class="tip-text">清晨的柔和光线最适合拍摄樱花，可尝试低角度拍摄樱花与建筑的结合，或捕捉花瓣飘落的动态瞬间。</p>
+                    </div>
+                    
+                    <div class="tip-item">
+                        <div class="tip-icon"><i class="fa fa-ticket"></i></div>
+                        <h3 class="tip-title">门票信息</h3>
+                        <p class="tip-text">多数公园免费开放，但新宿御苑等需要购票（约500日元），部分夜樱活动可能收取灯光费。</p>
+                    </div>
+                    
+                    <div class="tip-item">
+                        <div class="tip-icon"><i class="fa fa-subway"></i></div>
+                        <h3 class="tip-title">交通建议</h3>
+                        <p class="tip-text">樱花季景点周边交通拥堵，建议优先选择地铁出行，部分地点可租用自行车，更灵活地欣赏沿途樱花。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <p>© 东京樱花季指南 | 探索东京最美的春天</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

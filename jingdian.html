@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>东京热门景点 - 东京旅游指南</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <style>
+        /* 基础粉色主题配色 */
+        :root {
+            --primary-pink: #ff7eb9;
+            --light-pink: #ffeff6;
+            --medium-pink: #ffc2d1;
+            --dark-pink: #e75480;
+            --text-color: #4a4a4a;
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            background-color: var(--primary-pink);
+        }
+        .navbar-brand img {
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+        }
+        .nav-link {
+            color: white !important;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--light-pink) !important;
+            transform: translateY(-2px);
+        }
+        
+        /* 页面头部 */
+        .page-header {
+            background: linear-gradient(rgba(255,126,185,0.8), rgba(255,126,185,0.9)), url('img/attractions-header.jpg') center center no-repeat;
+            background-size: cover;
+            padding: 80px 0 60px;
+            margin-top: 70px;
+            text-align: center;
+            color: white;
+        }
+        .header-title {
+            font-size: 42px;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header-desc {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        /* 内容区域 */
+        .content-container {
+            padding: 40px 0;
+            background-color: #fff;
+        }
+        
+        /* 视频区域 */
+        .video-section {
+            padding: 50px 0;
+            background-color: var(--light-pink);
+        }
+        .video-title {
+            text-align: center;
+            color: var(--dark-pink);
+            margin-bottom: 40px;
+            font-size: 28px;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 100%; /* 正方形比例 */
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(255,126,185,0.2);
+        }
+        .video-player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .video-caption {
+            text-align: center;
+            margin-top: 15px;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+        
+        /* 景点列表 */
+        .attractions-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .attraction-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(255,126,185,0.1);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .attraction-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255,126,185,0.2);
+        }
+        .attraction-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .attraction-info {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .attraction-title {
+            color: var(--dark-pink);
+            font-size: 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .attraction-title i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        .attraction-desc {
+            color: var(--text-color);
+            font-size: 14px;
+            line-height: 1.6;
+            flex: 1;
+            margin-bottom: 15px;
+        }
+        .attraction-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+            background-color: var(--light-pink);
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+        .meta-item i {
+            margin-right: 5px;
+            color: var(--dark-pink);
+        }
+        
+        /* 分隔区域 */
+        .section-divider {
+            height: 60px;
+            background: linear-gradient(90deg, var(--light-pink), var(--medium-pink), var(--light-pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .divider-text {
+            color: var(--dark-pink);
+            font-weight: bold;
+            background-color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        /* 返回顶部按钮 */
+        .back-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-pink);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .back-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--dark-pink);
+            color: white;
+            padding: 30px 0;
+            margin-top: 30px;
+        }
+        footer a {
+            color: var(--light-pink);
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: white;
+            text-decoration: none;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 32px;
+            }
+            .attractions-list {
+                grid-template-columns: 1fr;
+            }
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            .page-header {
+                padding: 60px 20px 40px;
+                margin-top: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏（支持返回首页） -->
+    <nav class="navbar navbar-expand-xl fixed-top">
+        <a class="navbar-brand ml-5" href="index.html">
+            <img src="img/logo-public.png" alt="东京旅游" style="height: 50px;">
+        </a>
+        <button type="button" class="btn btn-light navbar-toggler" data-toggle="collapse" data-target="#attractionsNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="attractionsNav">
+            <ul class="navbar-nav px-5 mr-5">
+                <li class="nav-item mr-4"><a href="index.html" class="nav-link">首页</a></li>
+                <li class="nav-item mr-4"><a href="tokyo-attractions.html" class="nav-link active">热门景点</a></li>
+                <li class="nav-item mr-4"><a href="shop.html" class="nav-link">东京美食</a></li>
+                <li class="nav-item mr-4"><a href="traffic.html" class="nav-link">交通指南</a></li>
+                <li class="nav-item mr-4"><a href="hotel.html" class="nav-link">住宿推荐</a></li>
+                <li class="nav-item mr-4"><a href="odaiba.html" class="nav-link">台场专题</a></li>
+                <li class="nav-item mr-4"><a href="shibuya.html" class="nav-link">涉谷专题</a></li>
+                <li class="nav-item mr-4"><a href="marunouchi.html" class="nav-link">大手町·丸之内</a></li>
+                <li class="nav-item mr-4"><a href="faq.html" class="nav-link">常见问题</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 页面头部 -->
+    <div class="page-header">
+        <div class="container">
+            <h1 class="header-title">东京热门景点</h1>
+            <p class="header-desc">探索东京最受欢迎的20个景点，从标志性建筑到隐秘宝藏，体验东京的多元魅力</p>
+        </div>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="content-container">
+        <div class="container">
+            <!-- 第一组景点 -->
+            <div class="attractions-list">
+                <!-- 景点1 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-1.jpg" alt="东京塔" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-flag"></i>东京塔</h3>
+                        <p class="attraction-desc">东京的标志性建筑，建于1958年，高333米。模仿巴黎埃菲尔铁塔设计，夜晚灯光璀璨，是观赏东京夜景的绝佳地点。塔下的东京铁塔公园是休闲散步的好地方，春季樱花盛开时尤其美丽。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 东京都港区芝公园4-2-8</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 9:00-23:00</div>
+                            <div class="meta-item"><i class="bi bi-ticket"></i> 成人1,200日元</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 景点2 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-2.jpg" alt="浅草寺" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-flag"></i>浅草寺</h3>
+                        <p class="attraction-desc">东京最古老的寺庙，建于628年，位于东京都台东区。标志性的雷门（正式名称为"风雷神门"）是游客必打卡地点，门前的仲见世商店街出售各种传统工艺品和小吃，是体验日本传统文化的好去处。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 东京都台东区浅草2-3-1</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 6:00-17:00（主殿）</div>
+                            <div class="meta-item"><i class="bi bi-ticket"></i> 免费</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 景点3 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-3.jpg" alt="上野公园" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-flag"></i>上野公园</h3>
+                        <p class="attraction-desc">东京最著名的公园之一，占地广阔，内有上野动物园、东京国立博物馆、国立科学博物馆等多个文化设施。春季樱花季时，公园内的1200多棵樱花树竞相绽放，吸引大量游客前来赏樱，是东京最热门的赏樱地点之一。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 东京都台东区上野公园</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 全天开放</div>
+                            <div class="meta-item"><i class="bi bi-ticket"></i> 公园免费（内部设施另收费）</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 景点4 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-4.jpg" alt="涩谷十字路口" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-flag"></i>涩谷十字路口</h3>
+                        <p class="attraction-desc">被称为"世界上最繁忙的十字路口"，每次绿灯亮起时，会有数千人同时穿过马路。位于涩谷站附近，周边有众多购物中心、餐厅和娱乐设施。从涩谷Scramble Square的观景台可以俯瞰这一壮观景象。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 东京都涩谷区涩谷</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 全天（周边商店通常10:00-21:00）</div>
+                            <div class="meta-item"><i class="bi bi-ticket"></i> 免费观赏</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 景点5 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-5.jpg" alt="秋叶原电器街" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-flag"></i>秋叶原电器街</h3>
+                        <p class="attraction-desc">世界著名的电器产品和动漫文化街区，位于东京都千代田区。这里有各种电子产品商店、动漫周边店、游戏中心和主题咖啡馆，是电子产品爱好者和动漫迷的天堂。近年来也成为了cosplay文化的重要据点。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 东京都千代田区秋叶原</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 大多数商店10:00-20:00</div>
+                            <div class="meta-item"><i class="bi bi-subway"></i> JR秋叶原站步行可达</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第一组视频 -->
+            <div class="video-section">
+                <div class="container">
+                    <h2 class="video-title">东京景点实拍</h2>
+                    <div class="video-grid">
+                        <div>
+                            <div class="video-wrapper">
+                                <video class="video-player" controls poster="img/video-poster1.jpg">
+                                    <source src="img/tokyo-station.mp4" type="video/mp4">
+                                    您的浏览器不支持视频播放
+                                </video>
+                            </div>
+                            <p class="video-caption">东京站丸之内全景实拍</p>
+                        </div>
+                        <div>
+                            <div class="video-wrapper">
+                                <video class="video-player" controls poster="img/video-poster2.jpg">
+                                    <source src="img/tokyo-asakusa.mp4" type="video/mp4">
+                                    您的浏览器不支持视频播放
+                                </video>
+                            </div>
+                            <p class="video-caption">浅草寺雷门与仲见世商店街</p>
+                        </div>
+                        <div>
+                            <div class="video-wrapper">
+                                <video class="video-player" controls poster="img/video-poster3.jpg">
+                                    <source src="img/tokyo-cherryblossom.mp4" type="video/mp4">
+                                    您的浏览器不支持视频播放
+                                </video>
+                            </div>
+                            <p class="video-caption">上野公园樱花季美景</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 分隔区域 -->
+            <div class="section-divider">
+                <span class="divider-text">文化与历史景点</span>
+            </div>
+
+            <!-- 第二组景点 -->
+            <div class="attractions-list">
+                <!-- 景点6 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-6.jpg" alt="东京国立博物馆" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-book"></i>东京国立博物馆</h3>
+                        <p class="attraction-desc">日本最古老、最大的博物馆，位于上野公园内，成立于1872年。馆藏超过11万件文物，包括日本、中国和其他亚洲国家的艺术品和历史文物，其中有87件被列为国宝。博物馆由多个展馆组成，展示了日本从古代到现代的文化发展。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 东京都台东区上野公园13-9</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 9:30-17:00（周五、六至20:00）</div>
+                            <div class="meta-item"><i class="bi bi-ticket"></i> 成人1,000日元</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 景点7 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-7.jpg" alt="皇居" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-book"></i>皇居</h3>
+                        <p class="attraction-desc">日本天皇的住所，位于东京市中心，占地约1.15平方公里。皇居由江户城遗址改建而成，周围环绕着护城河和城墙。皇居内部不对外开放，但游客可以参观皇居外苑和东御苑，欣赏日本传统庭园和历史建筑。每年新年和天皇生日时，皇居会对外开放。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 东京都千代田区千代田</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 9:00-17:00（外苑）</div>
+                            <div class="meta-item"><i class="bi bi-ticket"></i> 免费（内部参观需预约）</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 景点8 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-8.jpg" alt="明治神宫" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-book"></i>明治神宫</h3>
+                        <p class="attraction-desc">位于涩谷区，是为纪念明治天皇和昭宪皇太后而建立的神社，建于1920年。神社被茂密的森林环绕，占地约70公顷，是东京市中心的一片绿洲。明治神宫是日本最重要的神社之一，每年吸引大量游客和参拜者，尤其是在新年期间。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 东京都涩谷区代代木神园町1-1</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 日出至日落（通常6:00-18:00）</div>
+                            <div class="meta-item"><i class="bi bi-ticket"></i> 免费</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 景点9 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-9.jpg" alt="增上寺" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-book"></i>增上寺</h3>
+                        <p class="attraction-desc">位于东京都港区，是日本重要的佛教寺院，属于净土宗。寺庙始建于1393年，历史悠久。增上寺以其与德川幕府的密切关系而闻名，多位德川幕府将军安葬于此。寺庙内的建筑宏伟壮观，尤其是三门（山门）和本堂，是江户时代建筑的代表作。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 东京都港区芝公园4-7-35</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 9:00-16:30</div>
+                            <div class="meta-item"><i class="bi bi-ticket"></i> 免费</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 景点10 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-10.jpg" alt="江户东京博物馆" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-book"></i>江户东京博物馆</h3>
+                        <p class="attraction-desc">位于东京都墨田区，致力于展示江户时代（1603-1868）的东京（当时称为江户）的历史和文化。博物馆内有许多按比例复原的江户时代建筑和街道模型，包括木造的江户城模型和Nihonbashi桥的复制品。通过展品和互动展览，游客可以深入了解东京的历史变迁。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 东京都墨田区横网1-4-1</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 9:30-17:00（周五至20:00）</div>
+                            <div class="meta-item"><i class="bi bi-ticket"></i> 成人600日元</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 分隔区域 -->
+            <div class="section-divider">
+                <span class="divider-text">现代娱乐景点</span>
+            </div>
+
+            <!-- 第三组景点 -->
+            <div class="attractions-list">
+                <!-- 景点11 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-11.jpg" alt="东京迪士尼乐园" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-star"></i>东京迪士尼乐园</h3>
+                        <p class="attraction-desc">位于千叶县浦安市，是亚洲第一座迪士尼主题公园，于1983年开放。乐园分为七个主题区域，包括世界市集、探险乐园、西部乐园、动物天地、梦幻乐园、卡通城和明日乐园。园内有各种游乐设施、表演和游行，是家庭游客的热门目的地。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 千叶县浦安市舞滨1-1</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 8:00-22:00（时间可变）</div>
+                            <div class="meta-item"><i class="bi bi-ticket"></i> 成人7,900日元</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 景点12 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-12.jpg" alt="东京迪士尼海洋" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-star"></i>东京迪士尼海洋</h3>
+                        <p class="attraction-desc">位于东京迪士尼乐园附近，是全球唯一以海洋为主题的迪士尼乐园，于2001年开放。乐园分为七个主题海港，包括地中海港湾、美国海滨、发现港、失落河三角洲、阿拉伯海岸、美人鱼礁湖和神秘岛。相比迪士尼乐园，这里更适合成年人和情侣游玩。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 千叶县浦安市舞滨1-13</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 8:00-21:00（时间可变）</div>
+                            <div class="meta-item"><i class="bi bi-ticket"></i> 成人7,900日元</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 景点13 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-13.jpg" alt="东京天空树" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-star"></i>东京天空树</h3>
+                        <p class="attraction-desc">高634米，是目前世界上最高的广播塔，于2012年竣工。位于东京都墨田区，取代东京塔成为东京的新地标。天空树有两个观景台，分别位于350米和450米高度，提供360度俯瞰东京全景的体验。塔下的东京天空镇是一个大型购物中心和娱乐综合体。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 东京都墨田区押上1-1-2</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 10:00-21:00</div>
+                            <div class="meta-item"><i class="bi bi-ticket"></i> 成人3,100日元（Tembo Deck）</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 景点14 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-14.jpg" alt="台场DiverCity" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-star"></i>台场DiverCity</h3>
+                        <p class="attraction-desc">位于东京都港区台场的大型购物中心，以其户外广场上的18米高1:1比例高达模型而闻名。购物中心内有各种时尚品牌店、电子产品店、动漫周边店和餐厅。此外，DiverCity还设有"东京JOYPOLIS"室内主题乐园，提供各种游乐设施和互动体验。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 东京都港区台场1-1-10</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 10:00-21:00</div>
+                            <div class="meta-item"><i class="bi bi-subway"></i> 临海线台场站步行5分钟</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 景点15 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-15.jpg" alt="teamLab Planets" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-star"></i>teamLab Planets</h3>
+                        <p class="attraction-desc">位于台场的沉浸式数字艺术博物馆，由艺术团队teamLab创建。博物馆内没有固定的展览路线，游客可以自由探索各种互动艺术装置，体验艺术与科技的完美结合。展览包括"无限延伸的水晶宇宙"、"漂浮的花与因人而在的岩石"等，需要脱鞋并赤脚体验。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 东京都港区台场1-3-88</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 10:00-19:00（周二休馆）</div>
+                            <div class="meta-item"><i class="bi bi-ticket"></i> 约3,200日元（需预约）</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 分隔区域 -->
+            <div class="section-divider">
+                <span class="divider-text">自然与休闲景点</span>
+            </div>
+
+            <!-- 第四组景点 -->
+            <div class="attractions-list">
+                <!-- 景点16 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-16.jpg" alt="新宿御苑" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-leaf"></i>新宿御苑</h3>
+                        <p class="attraction-desc">位于新宿区的大型公园，占地约58公顷，融合了日本传统庭园、英式风景园和法式庭园三种风格。公园内种植了大量树木和花卉，春季樱花、秋季红叶都非常美丽。新宿御苑是东京市中心难得的宁静之地，是当地人休闲放松的好去处，也是观赏四季花卉的理想场所。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 东京都新宿区新宿御苑町10-1</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 9:00-16:30（最晚入园16:00）</div>
+                            <div class="meta-item"><i class="bi bi-ticket"></i> 成人500日元</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 景点17 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-17.jpg" alt="代代木公园" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-leaf"></i>代代木公园</h3>
+                        <p class="attraction-desc">位于涩谷区，占地约54公顷，是东京最受欢迎的城市公园之一。公园内有大片草坪、茂密的树林和一个小型湖泊，是当地人进行户外活动、野餐和放松的热门地点。春季，公园内的樱花树盛开，吸引大量游客；夏季则举办各种户外活动和音乐会。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 东京都涩谷区代代木神园町2-1</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 24小时开放（部分区域有时间限制）</div>
+                            <div class="meta-item"><i class="bi bi-ticket"></i> 免费</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 景点18 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-18.jpg" alt="东京都美术馆" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-leaf"></i>上野动物园</h3>
+                        <p class="attraction-desc">位于上野公园内，是日本最古老的动物园，成立于1882年。动物园分为东园和西园两部分，饲养了约400种、2,000多只动物，包括大熊猫、长颈鹿、狮子、老虎等。上野动物园致力于动物保护和教育，是家庭游客的热门选择，尤其是在周末和假期。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 东京都台东区上野公园9-83</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 9:30-17:00（3月-10月）</div>
+                            <div class="meta-item"><i class="bi bi-ticket"></i> 成人600日元</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 景点19 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-19.jpg" alt="隅田川花火大会" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-leaf"></i>隅田川花火大会</h3>
+                        <p class="attraction-desc">东京最著名的花火大会之一，每年7月下旬举行，已有超过300年的历史。大会在隅田川上空燃放约2万发烟花，吸引超过100万观众。最佳观赏地点包括樱桥、言问桥附近的河岸和周边高楼的观景台。花火大会是东京夏季最受欢迎的活动之一，体现了日本的传统节庆文化。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 东京都台东区、墨田区隅田川沿岸</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 每年7月下旬，19:00-20:30</div>
+                            <div class="meta-item"><i class="bi bi-ticket"></i> 免费（部分付费观赏区）</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 景点20 -->
+                <div class="attraction-card">
+                    <img src="img/attraction-20.jpg" alt="三鹰之森吉卜力美术馆" class="attraction-img">
+                    <div class="attraction-info">
+                        <h3 class="attraction-title"><i class="bi bi-leaf"></i>三鹰之森吉卜力美术馆</h3>
+                        <p class="attraction-desc">位于东京都三鹰市，由著名动画导演宫崎骏设计，展示吉卜力工作室的动画作品和创作过程。美术馆建筑风格独特，内部充满了动画元素，包括《龙猫》《天空之城》等经典作品的场景重现。馆内不允许拍照，游客可以在专门的放映室观看独家短片。门票需提前在Lawson便利店预约购买。</p>
+                        <div class="attraction-meta">
+                            <div class="meta-item"><i class="bi bi-map-marker"></i> 东京都三鹰市下连雀1-1-83</div>
+                            <div class="meta-item"><i class="bi bi-clock"></i> 10:00-18:00（周二休馆）</div>
+                            <div class="meta-item"><i class="bi bi-ticket"></i> 成人1,000日元（需预约）</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <div class="back-top" id="backTop">
+        <i class="bi bi-arrow-up"></i>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container text-center">
+            <p>© 2025 东京旅游指南 | 涵总版权所有</p>
+            <p class="mt-2" style="font-size: 14px; opacity: 0.8;">
+                <a href="index.html">首页</a>
+                <a href="faq.html">常见问题</a>
+                <a href="#">联系我们</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script>
+        // 导航栏滚动效果
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) {
+                $('.navbar').css('background-color', 'var(--dark-pink)');
+                $('.navbar').css('box-shadow', '0 4px 10px rgba(0,0,0,0.1)');
+            } else {
+                $('.navbar').css('background-color', 'var(--primary-pink)');
+                $('.navbar').css('box-shadow', 'none');
+            }
+
+            // 返回顶部按钮显示/隐藏
+            if ($(this).scrollTop() > 600) {
+                $('#backTop').addClass('show');
+            } else {
+                $('#backTop').removeClass('show');
+            }
+        });
+
+        // 返回顶部功能
+        $('#backTop').click(function() {
+            $('html, body').animate({scrollTop: 0}, 500);
+        });
+
+        // 页面加载时触发滚动检查
+        $(window).trigger('scroll');
+        
+        console.log("涵总版权所有");
+    </script>
+</body>
+</html>

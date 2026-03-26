@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>东京 - 台场专题</title>
+    <!-- 共享样式文件 -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <!-- 专题页专属样式 -->
+    <style>
+        /* 顶部视频区 */
+        .video-section {
+            position: relative;
+            height: 500px;
+            margin-top: 80px;
+            overflow: hidden;
+        }
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7));
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .video-title {
+            color: white;
+            text-align: center;
+            z-index: 3;
+        }
+        .video-title h1 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.3);
+        }
+        .video-title p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        .video-play-btn {
+            margin-top: 30px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-left: auto;
+            margin-right: auto;
+            transition: all 0.3s ease;
+        }
+        .video-play-btn:hover {
+            background-color: rgba(255,255,255,0.4);
+            transform: scale(1.05);
+        }
+
+        /* 区域简介 */
+        .intro-section {
+            padding: 60px 0;
+            background-color: #f9f9f9;
+        }
+        .intro-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .intro-container h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 32px;
+        }
+        .intro-desc {
+            color: #666;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        /* 景点模块 */
+        .spots-section {
+            padding: 80px 0;
+        }
+        .section-heading {
+            text-align: center;
+            margin-bottom: 60px;
+            color: #2c3e50;
+        }
+        .section-heading h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+        .section-heading p {
+            color: #7f8c8d;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .spot-card {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        .spot-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .spot-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+        .spot-info {
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .spot-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background-color: #3498db;
+            color: white;
+            font-size: 14px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        .spot-title {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .spot-desc {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+        .spot-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+        }
+        .meta-item i {
+            margin-right: 8px;
+            color: #3498db;
+            font-size: 16px;
+        }
+
+        /* 特色体验区 */
+        .experience-section {
+            padding: 60px 0;
+            background-color: #f9f9f9;
+        }
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .experience-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        .experience-card:hover {
+            transform: translateY(-8px);
+        }
+        .experience-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        .experience-info {
+            padding: 25px;
+        }
+        .experience-title {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+        .experience-desc {
+            color: #666;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* 返回顶部按钮 */
+        .back-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #2c3e50;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        .back-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 992px) {
+            .video-section {
+                height: 400px;
+            }
+            .video-title h1 {
+                font-size: 36px;
+            }
+            .spot-img {
+                height: 320px;
+                margin-bottom: 30px;
+            }
+        }
+        @media (max-width: 768px) {
+            .video-section {
+                height: 300px;
+            }
+            .video-title h1 {
+                font-size: 28px;
+            }
+            .video-title p {
+                font-size: 16px;
+                padding: 0 20px;
+            }
+            .spot-title {
+                font-size: 24px;
+            }
+            .spot-meta {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏（与其他页面一致，支持返回首页） -->
+    <div class="fixed-top" style="background-color: rgba(0, 0, 0, 0.8);">
+        <nav class="navbar navbar-expand-xl navbar-dark">
+            <a class="navbar-brand ml-5" href="index.html">
+                <img src="img/logo-public.png" alt="东京旅游" style="height: 50px;">
+            </a>
+            <button type="button" class="btn btn-secondary navbar-toggler" data-toggle="collapse" data-target="#odaibaNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="odaibaNav">
+                <ul class="navbar-nav px-5 mr-5">
+                    <li class="nav-item mr-4"><a href="index.html" class="nav-link text-white">首页</a></li>
+                    <li class="nav-item mr-4"><a href="introduce.html" class="nav-link text-white">东京美景</a></li>
+                    <li class="nav-item mr-4"><a href="shop.html" class="nav-link text-white">东京美食</a></li>
+                    <li class="nav-item mr-4"><a href="shibuya.html" class="nav-link text-white">涉谷专题</a></li>
+                    <li class="nav-item mr-4"><a href="marunouchi.html" class="nav-link text-white">大手町·丸之内</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- 顶部视频区（支持播放） -->
+    <div class="video-section">
+        <!-- 视频背景（可替换为实际视频路径） -->
+        <video class="video-bg" loop muted preload="metadata">
+            <source src="img/videoodaiba-video.mp4" type="video/mp4">
+            您的浏览器不支持视频播放，请更新浏览器
+        </video>
+        <div class="video-overlay">
+            <div class="video-title">
+                <h1>台场 · 东京未来感海滨</h1>
+                <p>东京湾畔的科技与娱乐天堂，汇集未来建筑、主题乐园与绝美海景</p>
+                <div class="video-play-btn" id="playBtn">
+                    <i class="bi bi-play"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 区域简介 -->
+    <div class="intro-section">
+        <div class="container intro-container">
+            <h2>关于台场</h2>
+            <p class="intro-desc">
+                台场位于东京都港区，是填海造陆形成的海滨区域，曾是东京重要的工业码头，如今已转型为集科技、娱乐、购物于一体的热门旅游区。这里以未来感的建筑（如富士电视台总部）、大型购物中心（如DiverCity Tokyo Plaza）和东京湾海景闻名，夜晚的彩虹大桥灯光更是东京标志性夜景之一。
+            </p>
+            <p class="intro-desc mt-4">
+                台场也是动漫与二次元文化的聚集地，高达立像、独角兽高达模型等打卡点吸引大量粉丝，同时拥有东京杜莎夫人蜡像馆、teamLab Planets等热门体验场馆，适合全年龄段游客游玩。
+            </p>
+        </div>
+    </div>
+
+    <!-- 核心景点展示 -->
+    <div class="spots-section">
+        <div class="container">
+            <div class="section-heading">
+                <h2>台场必游景点</h2>
+                <p>从未来感建筑到主题场馆，探索台场最具代表性的游玩地</p>
+            </div>
+
+            <!-- 景点1：DiverCity Tokyo Plaza（高达立像） -->
+            <div class="spot-card row">
+                <div class="col-lg-6">
+                    <img src="img/odaiba-gundam.jpg" alt="DiverCity Tokyo Plaza 高达立像" class="spot-img">
+                </div>
+                <div class="col-lg-6 spot-info">
+                    <span class="spot-tag">动漫打卡·购物</span>
+                    <h3 class="spot-title">DiverCity Tokyo Plaza 高达立像</h3>
+                    <p class="spot-desc">
+                        台场最热门的打卡点之一，商场门口矗立着18米高的1:1高达立像（不定期更换机型，如独角兽高达、自由高达），每天固定时段会有灯光秀与模型动效表演，吸引大量动漫粉丝与摄影爱好者。
+                        <br><br>
+                        商场内部包含多家动漫周边店、潮流品牌店及餐厅，地下一层的"高达基地"（Gundam Base Tokyo）更是高达模型爱好者的天堂，可购买限定模型并体验拼装。
+                    </p>
+                    <div class="spot-meta">
+                        <div class="meta-item">
+                            <i class="bi bi-map-marker"></i>
+                            <span>东京都港区台场1-1-10</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="bi bi-clock"></i>
+                            <span>商场10:00-21:00（高达灯光秀19:00/20:00）</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="bi bi-subway"></i>
+                            <span>临海线"台场站"步行5分钟</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 景点2：富士电视台总部大楼 -->
+            <div class="spot-card row flex-column-reverse flex-lg-row">
+                <div class="col-lg-6 spot-info">
+                    <span class="spot-tag">未来建筑·观景</span>
+                    <h3 class="spot-title">富士电视台总部大楼</h3>
+                    <p class="spot-desc">
+                        台场标志性建筑之一，由著名建筑师丹下健三设计，独特的"球体展望室"（FUJI TV BALL）是其最大特色。展望室位于31层，透过360度玻璃可俯瞰东京湾、彩虹大桥及台场景色，内部还展示富士电视台经典节目的道具与影像资料。
+                        <br><br>
+                        大楼底层的"富士电视台广场"经常举办主题活动与展览，入口处的"太空船"造型电梯也极具未来感，是台场必拍的建筑景观之一。
+                    </p>
+                    <div class="spot-meta">
+                        <div class="meta-item">
+                            <i class="bi bi-map-marker"></i>
+                            <span>东京都港区台场2-4-8</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="bi bi-clock"></i>
+                            <span>展望室10:00-19:00（周一休馆）</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="bi bi-ticket"></i>
+                            <span>展望室门票：成人700日元</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="img/odaiba-fuji-tv.jpg" alt="富士电视台总部大楼" class="spot-img">
+                </div>
+            </div>
+
+            <!-- 景点3：teamLab Planets -->
+            <div class="spot-card row">
+                <div class="col-lg-6">
+                    <img src="img/odaiba-teamlab.jpg" alt="teamLab Planets" class="spot-img">
+                </div>
+                <div class="col-lg-6 spot-info">
+                    <span class="spot-tag">艺术体验·互动</span>
+                    <h3 class="spot-title">teamLab Planets</h3>
+                    <p class="spot-desc">
+                        全球知名的数字艺术博物馆，通过光影、投影与互动技术打造沉浸式艺术空间。场馆包含"无限延伸的水晶宇宙"、"漂浮的花与因人而在的岩石"等多个展区，游客需脱鞋并赤脚体验（部分展区有水），感受艺术与身体的融合。
+                        <br><br>
+                        展览内容会定期更新，建议提前在官网预约门票，避免现场排队。馆内禁止拍照（部分展区允许），可专注感受数字艺术的震撼效果。
+                    </p>
+                    <div class="spot-meta">
+                        <div class="meta-item">
+                            <i class="bi bi-map-marker"></i>
+                            <span>东京都港区台场1-3-88</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="bi bi-clock"></i>
+                            <span>10:00-19:00（周二休馆，时间可能变动）</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="bi bi-globe"></i>
+                            <span>需提前在官网预约</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 特色体验区 -->
+    <div class="experience-section">
+        <div class="container">
+            <div class="section-heading">
+                <h2>台场特色体验</h2>
+                <p>除了景点，这些独特体验也能让你深度感受台场魅力</p>
+            </div>
+
+            <div class="experience-grid">
+                <!-- 体验1：彩虹大桥夜景 -->
+                <div class="experience-card">
+                    <img src="img/odaiba-rainbow-bridge.jpg" alt="彩虹大桥夜景" class="experience-img">
+                    <div class="experience-info">
+                        <h4 class="experience-title">彩虹大桥夜景观赏</h4>
+                        <p class="experience-desc">
+                            台场海滨公园是观赏彩虹大桥夜景的最佳地点之一，每晚19:00-23:00大桥会点亮蓝色与白色灯光，搭配东京塔夜景，构成绝美画面。可沿海滨步道散步，或在公园草坪上野餐赏景。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 体验2：东京杜莎夫人蜡像馆 -->
+                <div class="experience-card">
+                    <img src="img/odaiba-madame-tussauds.jpg" alt="东京杜莎夫人蜡像馆" class="experience-img">
+                    <div class="experience-info">
+                        <h4 class="experience-title">东京杜莎夫人蜡像馆</h4>
+                        <p class="experience-desc">
+                            位于台场Decks Tokyo Beach内，展示全球名人蜡像，包括好莱坞明星、体育选手、日本艺人等。可与蜡像合影互动，部分展区还设有AR体验，适合家庭与情侣游玩。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 体验3：台场海滨公园 -->
+                <div class="experience-card">
+                    <img src="img/odaiba-seaside-park.jpg" alt="台场海滨公园" class="experience-img">
+                    <div class="experience-info">
+                        <h4 class="experience-title">台场海滨公园</h4>
+                        <p class="experience-desc">
+                            沿东京湾修建的城市公园，拥有大片草坪与海滨步道。春季可赏樱，夏季可玩水（浅滩区域），秋季能观赏海上日落，是放松休闲的好去处，也是拍摄彩虹大桥与东京塔同框的绝佳位置。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <div class="back-top" id="backTop">
+        <i class="bi bi-arrow-up"></i>
+    </div>
+
+    <!-- 页脚 -->
+    <footer style="background-color: #343a40; color: white; padding: 30px 0;">
+        <div class="container text-center">
+            <p>© 2025 东京旅游指南 | 涵总版权所有</p>
+            <p class="mt-2" style="font-size: 14px; opacity: 0.8;">
+                <a href="index.html" style="color: white; margin: 0 10px;">首页</a>
+                <a href="faq.html" style="color: white; margin: 0 10px;">常见问题</a>
+                <a href="#" style="color: white; margin: 0 10px;">联系我们</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- 脚本 -->
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script>
+        // 导航栏滚动效果
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) {
+                $('.fixed-top').css('background-color', 'rgba(0,0,0,0.9)');
+            } else {
+                $('.fixed-top').css('background-color', 'rgba(0,0,0,0.8)');
+            }
+
+            // 显示/隐藏返回顶部按钮
+            if ($(this).scrollTop() > 600) {
+                $('#backTop').addClass('show');
+            } else {
+                $('#backTop').removeClass('show');
+            }
+
+            // 景点卡片滚动渐入
+            $('.spot-card').each(function() {
+                const cardTop = $(this).offset().top;
+                const windowBottom = $(window).scrollTop() + $(window).height();
+                if (cardTop < windowBottom - 150) {
+                    $(this).addClass('visible');
+                }
+            });
+        });
+
+        // 返回顶部功能
+        $('#backTop').click(function() {
+            $('html, body').animate({scrollTop: 0}, 600);
+        });
+
+        // 视频播放/暂停控制
+        const video = $('.video-bg')[0];
+        const playBtn = $('#playBtn');
+        let isPlaying = false;
+
+        playBtn.click(function() {
+            if (isPlaying) {
+                video.pause();
+                playBtn.html('<i class="bi bi-play"></i>');
+            } else {
+                video.play();
+                playBtn.html('<i class="bi bi-pause"></i>');
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // 页面加载时触发滚动检查
+        $(window).trigger('scroll');
+
+        console.log("涵总版权所有");
+    </script>
+</body>
+</html>

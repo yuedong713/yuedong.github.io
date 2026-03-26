@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025东京樱花季预测 - 粉色风暴抢先看</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #fff9f9;
+            color: #333;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(255,182,193,0.2);
+            padding: 0.8rem 0;
+        }
+
+        .back-home {
+            color: #e86a92;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .back-home i {
+            margin-right: 8px;
+        }
+
+        .back-home:hover {
+            color: #d6336c;
+            transform: translateX(-3px);
+        }
+
+        /* 页面容器：三栏布局 */
+        .page-container {
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 280px 1fr 280px;
+            gap: 1.5rem;
+        }
+
+        /* 左侧边栏 */
+        .sidebar-left {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        /* 右侧边栏 */
+        .sidebar-right {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        /* 边栏卡片通用样式 */
+        .sidebar-card {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+        }
+
+        .sidebar-card-title {
+            font-size: 1rem;
+            color: #d6336c;
+            margin: 0 0 0.8rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #ffccd5;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar-card-title i {
+            margin-right: 6px;
+            font-size: 0.9rem;
+        }
+
+        /* 左侧边栏内容 */
+        /* 核心预测 */
+        .forecast-core {
+            background-color: #fff0f3;
+            border-left: 3px solid #e86a92;
+            padding: 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 0.8rem;
+        }
+
+        .forecast-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .forecast-label {
+            color: #666;
+        }
+
+        .forecast-value {
+            font-weight: 600;
+            color: #d6336c;
+        }
+
+        /* 天气提示 */
+        .weather-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .weather-item {
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .weather-item i {
+            color: #e86a92;
+            margin-right: 6px;
+            font-size: 0.8rem;
+        }
+
+        /* 右侧边栏内容 */
+        /* 赏樱装备 */
+        .gear-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .gear-item {
+            font-size: 0.85rem;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .gear-item i {
+            color: #e86a92;
+            margin-right: 6px;
+            font-size: 0.8rem;
+        }
+
+        /* 交通贴士 */
+        .traffic-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .traffic-item {
+            font-size: 0.85rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .traffic-item strong {
+            font-size: 0.9rem;
+            color: #d6336c;
+        }
+
+        /* 活动日历 */
+        .event-mini-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .event-mini-item {
+            font-size: 0.8rem;
+            margin-bottom: 0.7rem;
+            padding-bottom: 0.7rem;
+            border-bottom: 1px dashed #ffccd5;
+        }
+
+        .event-mini-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .event-date {
+            font-weight: 600;
+            color: #d6336c;
+            margin-bottom: 0.2rem;
+        }
+
+        .event-name {
+            color: #333;
+        }
+
+        .event-location {
+            color: #666;
+            font-size: 0.75rem;
+        }
+
+        /* 中间主内容 */
+        .main-content {
+            padding: 0 0.5rem;
+        }
+
+        /* 新闻头部 */
+        .news-header {
+            margin: 0 0 1.5rem 0;
+        }
+
+        .news-badge {
+            display: inline-block;
+            background-color: #ffccd5;
+            color: #d6336c;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .news-title {
+            font-size: 2rem;
+            color: #2c3e50;
+            line-height: 1.3;
+            margin: 0 0 1rem 0;
+        }
+
+        .news-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: #7f8c8d;
+            font-size: 0.85rem;
+            margin: 0 0 1.2rem 0;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .meta-item i {
+            margin-right: 6px;
+            color: #e86a92;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 0 0 1.2rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        /* 新闻内容 */
+        .paragraph {
+            margin: 0 0 1.2rem 0;
+            font-size: 1.02rem;
+        }
+
+        .highlight {
+            background-color: #fff0f3;
+            padding: 0 4px;
+            border-radius: 3px;
+            color: #d6336c;
+            font-weight: 500;
+        }
+
+        /* 预测时间表 */
+        .forecast-table {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+            margin: 1.5rem 0;
+        }
+
+        .table-header {
+            background-color: #e86a92;
+            color: white;
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .table-body {
+            padding: 1rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 0 0 0.8rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: #ffccd5;
+            border-radius: 2px;
+        }
+
+        .timeline-date {
+            position: absolute;
+            left: -2rem;
+            width: 1.6rem;
+            height: 1.6rem;
+            background-color: #e86a92;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .timeline-content {
+            padding: 0.5rem 0.8rem;
+            background-color: #fff9f9;
+            border-radius: 4px;
+            border: 1px solid #ffccd5;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin: 0 0 0.2rem 0;
+            color: #2c3e50;
+            font-size: 0.95rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0;
+        }
+
+        /* 趣味知识 */
+        .fun-section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+            margin: 1.5rem 0;
+        }
+
+        .fun-title {
+            font-size: 1.1rem;
+            color: #d6336c;
+            margin: 0 0 0.8rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .fun-title i {
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+
+        .fun-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+        }
+
+        .fun-item {
+            font-size: 0.85rem;
+            padding: 0.6rem;
+            background-color: #fff9f9;
+            border-radius: 4px;
+        }
+
+        .fun-item i {
+            color: #e86a92;
+            margin-right: 5px;
+        }
+
+        /* 互动投票 */
+        .poll-section {
+            background-color: #fff0f3;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .poll-title {
+            font-size: 1rem;
+            color: #d6336c;
+            margin: 0 0 0.8rem 0;
+        }
+
+        .poll-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .poll-option {
+            background-color: white;
+            border-radius: 4px;
+            padding: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.85rem;
+        }
+
+        .poll-option:hover {
+            transform: translateX(3px);
+            border: 1px solid #e86a92;
+        }
+
+        .option-text {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .option-label {
+            font-weight: 500;
+        }
+
+        .option-votes {
+            color: #7f8c8d;
+            font-size: 0.8rem;
+        }
+
+        .option-bar {
+            height: 5px;
+            background-color: #ffccd5;
+            border-radius: 3px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background-color: #e86a92;
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: #2c3e50;
+            color: rgba(255,255,255,0.8);
+            text-align: center;
+            padding: 1.2rem 0;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+        }
+
+        /* 响应式调整：小屏幕合并为一栏 */
+        @media (max-width: 992px) {
+            .page-container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar-left, .sidebar-right {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero-image {
+                height: 280px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar-left, .sidebar-right {
+                grid-template-columns: 1fr;
+            }
+            .news-title {
+                font-size: 1.6rem;
+            }
+            .fun-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 - 返回首页 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="back-home">
+                <i class="fa fa-arrow-left"></i>
+                返回首页
+            </a>
+        </div>
+    </nav>
+
+    <!-- 三栏布局容器 -->
+    <div class="page-container">
+        <!-- 左侧边栏 -->
+        <div class="sidebar-left">
+            <!-- 核心预测卡片 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-card-title"><i class="fa fa-line-chart"></i> 核心预测速览</h3>
+                <div class="forecast-core">
+                    <div class="forecast-item">
+                        <span class="forecast-label">初开时间</span>
+                        <span class="forecast-value">3月15日</span>
+                    </div>
+                    <div class="forecast-item">
+                        <span class="forecast-label">满开时间</span>
+                        <span class="forecast-value">3月23日</span>
+                    </div>
+                    <div class="forecast-item">
+                        <span class="forecast-label">花期长度</span>
+                        <span class="forecast-value">7-10天</span>
+                    </div>
+                    <div class="forecast-item">
+                        <span class="forecast-label">较往年</span>
+                        <span class="forecast-value">提前10天</span>
+                    </div>
+                </div>
+                <p style="font-size: 0.8rem; color: #666; margin: 0;">
+                    数据来源：日本气象厅2024年12月樱花初报
+                </p>
+            </div>
+
+            <!-- 天气提示卡片 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-card-title"><i class="fa fa-cloud"></i> 赏樱天气提示</h3>
+                <ul class="weather-list">
+                    <li class="weather-item"><i class="fa fa-sun-o"></i> 3月中旬平均气温：10-15℃</li>
+                    <li class="weather-item"><i class="fa fa-tint"></i> 降雨概率：25%（建议带便携伞）</li>
+                    <li class="weather-item"><i class="fa fa-moon-o"></i> 夜间气温：5-8℃（需备薄外套）</li>
+                    <li class="weather-item"><i class="fa fa-wind"></i> 微风为主，适合拍摄樱花雨</li>
+                </ul>
+            </div>
+
+            <!-- 赏樱装备卡片 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-card-title"><i class="fa fa-suitcase"></i> 必备赏樱装备</h3>
+                <ul class="gear-list">
+                    <li class="gear-item"><i class="fa fa-camera"></i> 相机/手机（建议带备用电池）</li>
+                    <li class="gear-item"><i class="fa fa-umbrella"></i> 便携折叠伞（防雨防晒）</li>
+                    <li class="gear-item"><i class="fa fa-coffee"></i> 保温杯（樱花季清晨较凉）</li>
+                    <li class="gear-item"><i class="fa fa-map"></i> 离线地图（热门地可能信号弱）</li>
+                    <li class="gear-item"><i class="fa fa-snack"></i> 便携零食（部分公园禁止外带正餐）</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 中间主内容 -->
+        <div class="main-content">
+            <div class="news-header">
+                <span class="news-badge">独家预测</span>
+                <h1 class="news-title">2025东京樱花季大揭秘：提前10天绽放？花期缩短至7天！</h1>
+                
+                <div class="news-meta">
+                    <div class="meta-item"><i class="fa fa-calendar"></i> 2024.12.15 发布</div>
+                    <div class="meta-item"><i class="fa fa-user"></i> 樱花观察家 涵总</div>
+                    <div class="meta-item"><i class="fa fa-eye"></i> 阅读 3,2410</div>
+                    <div class="meta-item"><i class="fa fa-comment"></i> 评论 560</div>
+                </div>
+                
+                <img src="img/sakura-2025-hero.jpg" alt="2025东京樱花预测" class="hero-image">
+            </div>
+
+            <p class="paragraph">
+                日本气象厅12月发布的2025年樱花季初报显示，受厄尔尼诺现象影响，东京樱花可能迎来"史上最短花期"。首席研究员山田智子表示："冬季气温较往年偏高1.2℃，1月暖冬现象将加速樱花苏醒，满开期可能仅有5天黄金观赏窗口，错过就要再等一年！"
+            </p>
+
+            <p class="paragraph">
+                这一预测让不少游客调整行程——往年3月25日左右才进入满开期的东京樱花，2025年将在<span class="highlight">3月15日左右</span>出现首批"先锋樱"（目黑川、上野公园率先开花），3月20日进入盛花期（30%-50%绽放），3月23日达到满开峰值（80%以上），3月28日后花瓣开始大量散落。
+            </p>
+
+            <!-- 预测时间表 -->
+            <div class="forecast-table">
+                <h3 class="table-header">2025东京樱花时间轴（预测）</h3>
+                <div class="table-body">
+                    <div class="timeline">
+                        <div class="timeline-date">3/15</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">初开期（5%绽放）</div>
+                            <div class="timeline-desc">目黑川、上野公园首批开花，适合"樱花猎人"抢先打卡，清晨人少出片率高</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline">
+                        <div class="timeline-date">3/20</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">盛花期（30%-50%绽放）</div>
+                            <div class="timeline-desc">新宿御苑早樱品种最佳观赏期，人流较少，适合家庭出游</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline">
+                        <div class="timeline-date">3/23</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">满开期（80%以上绽放）</div>
+                            <div class="timeline-desc">全城粉色模式！千鸟渊、隅田川迎来最美景观，建议10点前抵达热门地</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline">
+                        <div class="timeline-date">3/28</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">飘落期（花瓣散落）</div>
+                            <div class="timeline-desc">"樱花雨"最佳观赏期，目黑川花瓣漂流梦幻登场，傍晚拍摄效果最佳</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="paragraph">
+                东京大学植物学教授佐藤健太解释："樱花对气温极其敏感，连续3天平均气温超12℃就会加速开花。2025年3月中旬的升温过程，可能让樱花'集体绽放'但也快速凋零。"他建议游客关注2月发布的"樱花前线"最终报告，实时调整赏樱计划——若2月出现降温，花期可能延长2-3天。
+            </p>
+
+            <!-- 趣味知识 -->
+            <div class="fun-section">
+                <h3 class="fun-title"><i class="fa fa-star"></i> 2025樱花季冷知识</h3>
+                <div class="fun-grid">
+                    <div class="fun-item"><i class="fa fa-lightbulb-o"></i> 上野公园首推"月光樱"灯光秀，3000盏LED灯让樱花呈现蓝粉色，每晚7-10点开放，免费入场</div>
+                    <div class="fun-item"><i class="fa fa-clock-o"></i> 东京站"钟樱"树龄80年，开花时间误差不超3天，被称为"天然日历"，今年预计3月21日精准绽放</div>
+                    <div class="fun-item"><i class="fa fa-subway"></i> 丸之内线地铁将释放樱花香氛，每小时一次，车厢内还会播放樱花主题音乐，打造沉浸式体验</div>
+                    <div class="fun-item"><i class="fa fa-shopping-bag"></i> 涩谷PARCO推出"樱花快闪店"，售卖限定樱花味零食（樱花可乐、樱花薯片、樱花巧克力等）</div>
+                </div>
+            </div>
+
+            <p class="paragraph">
+                资深赏樱达人小林奈奈分享独家秘籍："今年花期短，建议采用'早出晚归'战术——早6点去千鸟渊拍无人樱花海，晚8点去目黑川看夜樱。新宿御苑的八重樱可能延迟开花，可作为'樱花季尾巴'的备选。"她特别提醒，热门地点的樱花树下野餐需提前预约（如代代木公园），且禁止使用一次性餐具。
+            </p>
+
+            <!-- 互动投票 -->
+            <div class="poll-section">
+                <h3 class="poll-title">你最期待在东京哪里赏樱？（已有1,258人参与）</h3>
+                <div class="poll-options">
+                    <div class="poll-option">
+                        <div class="option-text">
+                            <span class="option-label">目黑川（樱花隧道+花瓣漂流）</span>
+                            <span class="option-votes">428票 (34%)</span>
+                        </div>
+                        <div class="option-bar">
+                            <div class="bar-fill" style="width: 34%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="poll-option">
+                        <div class="option-text">
+                            <span class="option-label">千鸟渊（乘船赏樱+夜樱）</span>
+                            <span class="option-votes">315票 (25%)</span>
+                        </div>
+                        <div class="option-bar">
+                            <div class="bar-fill" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="poll-option">
+                        <div class="option-text">
+                            <span class="option-label">上野公园（经典赏樱地+夜灯）</span>
+                            <span class="option-votes">264票 (21%)</span>
+                        </div>
+                        <div class="option-bar">
+                            <div class="bar-fill" style="width: 21%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="poll-option">
+                        <div class="option-text">
+                            <span class="option-label">新宿御苑（品种多+人少）</span>
+                            <span class="option-votes">251票 (20%)</span>
+                        </div>
+                        <div class="option-bar">
+                            <div class="bar-fill" style="width: 20%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧边栏 -->
+        <div class="sidebar-right">
+            <!-- 赏樱地点推荐 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-card-title"><i class="fa fa-map-marker"></i> 必去赏樱地</h3>
+                <ul class="traffic-list">
+                    <li class="traffic-item">
+                        <strong>目黑川</strong><br>
+                        最佳时间：3.22-3.25<br>
+                        特色：樱花隧道+花瓣漂流，夜樱有灯光
+                    </li>
+                    <li class="traffic-item">
+                        <strong>千鸟渊</strong><br>
+                        最佳时间：3.20-3.23<br>
+                        特色：乘船赏樱，人少景美，适合拍照
+                    </li>
+                    <li class="traffic-item">
+                        <strong>上野公园</strong><br>
+                        最佳时间：3.18-3.28<br>
+                        特色：1200棵樱花，有樱花祭活动
+                    </li>
+                    <li class="traffic-item">
+                        <strong>新宿御苑</strong><br>
+                        最佳时间：3.17-3.26<br>
+                        特色：品种多，有八重樱、染井吉野
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 交通贴士 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-card-title"><i class="fa fa-subway"></i> 交通贴士</h3>
+                <ul class="traffic-list">
+                    <li class="traffic-item">
+                        <strong>地铁优先</strong><br>
+                        赏樱季地面交通拥堵，建议选地铁（银座线、日比谷线覆盖多数景点）
+                    </li>
+                    <li class="traffic-item">
+                        <strong>交通卡推荐</strong><br>
+                        Suica/PASMO卡通用所有线路，7天以上可加购"东京地铁72小时券"
+                    </li>
+                    <li class="traffic-item">
+                        <strong>热门站出口</strong><br>
+                        上野公园：JR上野站"公园口"；目黑川：东急东横线"目黑站"西口
+                    </li>
+                    <li class="traffic-item">
+                        <strong>夜间返程</strong><br>
+                        末班车约23:30，夜樱后建议提前查好返程路线，避免错过末班车
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 活动日历 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-card-title"><i class="fa fa-calendar"></i> 樱花季活动</h3>
+                <ul class="event-mini-list">
+                    <li class="event-mini-item">
+                        <div class="event-date">3月20日</div>
+                        <div class="event-name">上野樱花祭开幕式</div>
+                        <div class="event-location">上野公园喷泉广场 | 10:00-12:00</div>
+                    </li>
+                    <li class="event-mini-item">
+                        <div class="event-date">3月22日</div>
+                        <div class="event-name">目黑川樱花音乐会</div>
+                        <div class="event-location">目黑川河畔舞台 | 18:00-20:00</div>
+                    </li>
+                    <li class="event-mini-item">
+                        <div class="event-date">3月23日</div>
+                        <div class="event-name">千鸟渊樱花游船夜宴</div>
+                        <div class="event-location">千鸟渊游船码头 | 18:30-21:00（需预约）</div>
+                    </li>
+                    <li class="event-mini-item">
+                        <div class="event-date">3月25日</div>
+                        <div class="event-name">新宿御苑樱花茶会</div>
+                        <div class="event-location">新宿御苑温室旁 | 14:00-16:00</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 预订提醒 -->
+            <div class="sidebar-card">
+                <h3 class="sidebar-card-title"><i class="fa fa-bell"></i> 预订提醒</h3>
+                <ul class="traffic-list">
+                    <li class="traffic-item">
+                        <strong>酒店</strong><br>
+                        热门赏樱区酒店3月房源已订50%，建议提前1个月锁定
+                    </li>
+                    <li class="traffic-item">
+                        <strong>游船</strong><br>
+                        千鸟渊游船需提前3天在官网预约，周末名额紧张
+                    </li>
+                    <li class="traffic-item">
+                        <strong>餐厅</strong><br>
+                        赏樱地周边餐厅建议提前1天预约，避免排队1小时以上
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <p>© 2025 东京樱花季预测 | 数据为初步预测，实际请以当年日本气象厅实时播报为准</p>
+        </div>
+    </footer>
+
+    <script>
+        // 投票互动功能
+        document.querySelectorAll('.poll-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const votesElem = option.querySelector('.option-votes');
+                const currentVotes = parseInt(votesElem.textContent.match(/\d+/)[0]);
+                const currentPercent = parseInt(votesElem.textContent.match(/\d+/g)[1]);
+                
+                const newVotes = currentVotes + 1;
+                const totalVotes = 1258 + 1;
+                const newPercent = Math.round((newVotes / totalVotes) * 100);
+                
+                votesElem.textContent = `${newVotes}票 (${newPercent}%)`;
+                option.querySelector('.bar-fill').style.width = `${newPercent}%`;
+                
+                alert('感谢你的投票！你的喜好将帮助更多人规划赏樱行程～');
+            });
+        });
+    </script>
+</body>
+</html>
